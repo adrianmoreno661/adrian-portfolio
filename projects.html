@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adrian Moreno | Projects</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    
+    <!-- Reuses your existing navbar & theme styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="projects.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" style="text-decoration: none;">AM.</a>
+            
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="burger-label">Menu</label>
+            
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="projects.html" class="active">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="index.html#contact">Contact Me!</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN PROJECTS SECTION -->
+    <main class="projects-page">
+        <div class="container">
+            
+            <!-- HEADER & CONTROLS -->
+            <div class="projects-header">
+                <div class="header-text">
+                    <h1 class="title">Projects</h1>
+                    <p class="subtitle">Engineering concepts, active builds, and completed prototypes.</p>
+                </div>
+
+                <div class="controls-wrapper">
+                    <!-- SEARCH INPUT -->
+                    <input 
+                        type="text" 
+                        id="project-search" 
+                        class="search-input" 
+                        placeholder="Search tools, tags, titles..."
+                        aria-label="Search projects"
+                    >
+
+                    <!-- PIPELINE FILTER TABS -->
+                    <div class="filter-bar" role="group" aria-label="Filter projects by stage">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="ideas">Ideas</button>
+                        <button class="filter-btn" data-filter="in-progress">In-Progress</button>
+                        <button class="filter-btn" data-filter="complete">Complete</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATUS / LOADING BAR -->
+            <div id="status-message" class="status-msg"></div>
+
+            <!-- DYNAMIC PROJECTS GRID -->
+            <div id="projects-grid" class="projects-grid"></div>
+
+        </div>
+    </main>
+
+    <!-- PROJECT DETAILS MODAL -->
+    <div id="project-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button id="modal-close" class="modal-close" aria-label="Close modal">&times;</button>
+            <img id="modal-img" src="" alt="" class="modal-image">
+            <div class="modal-content">
+                <span id="modal-status" class="status-badge"></span>
+                <h2 id="modal-title" class="modal-title"></h2>
+                <p id="modal-date" class="modal-date"></p>
+                <p id="modal-desc" class="modal-desc"></p>
+                <div id="modal-tags" class="card-tags"></div>
+                <div class="modal-actions">
+                    <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="cta-btn">
+                        Open Repository / CAD ↗
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="projects.js"></script>
+</body>
+</html>

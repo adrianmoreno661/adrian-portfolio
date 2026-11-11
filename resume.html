@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.svg">
+    <title>Adrian Moreno | Resume</title>
+
+    <!-- Google Fonts matching your homepage -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="resume.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" style="text-decoration: none;">AM.</a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="burger-label">Menu</label>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="resume.html" class="active">Resume</a>
+                <a href="contact.html">Contact Me!</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN RESUME CONTENT -->
+    <main class="resume-wrapper">
+
+        <!-- TOP SPLIT HEADER -->
+        <section class="container resume-hero">
+            <div class="resume-hero-left">
+                <h1 class="name">Adrian Moreno</h1>
+                <p class="job">Mechanical Engineering Student</p>
+
+                <a href="assets/Adrian_Moreno_Resume.pdf" download class="cta-btn">
+                    Download Resume <span class="arrow">↓</span>
+                </a>
+            </div>
+
+            <div class="resume-hero-right">
+                <img src="assets/resume-photo.jpg" alt="Adrian Moreno" class="resume-photo">
+            </div>
+        </section>
+
+        <!-- WHAT I CAN DO -->
+        <section class="container capabilities-section">
+            <h2 class="section-heading">What I Can Do</h2>
+
+            <div class="bubbles-container" id="skills-container">
+                <!-- Skills will load here automatically -->
+            </div>
+        </section>
+
+        <!-- SLIDING TIMELINE -->
+        <section class="marquee-section">
+            <div class="marquee-window">
+                <div class="marquee-track" id="timeline-track">
+
+                    <!-- SET 1 -->
+                    <div class="timeline-card">
+                        <span class="card-tag">School</span>
+                        <h3>Highland High School</h3>
+                        <p class="card-role">CLASS OF '27</p>
+                        <span class="card-location">Palmdale, CA</span>
+                    </div>
+
+                    <div class="timeline-card">
+                        <span class="card-tag">School</span>
+                        <h3>Highland High School</h3>
+                        <p class="card-role">CLASS OF '27</p>
+                        <span class="card-location">Palmdale, CA</span>
+                    </div>
+
+                    <div class="timeline-card">
+                        <span class="card-tag">School</span>
+                        <h3>Highland High School</h3>
+                        <p class="card-role">CLASS OF '27</p>
+                        <span class="card-location">Palmdale, CA</span>
+                    </div>
+
+                    <!-- SET 2 (Duplicate for seamless infinite loop) -->
+                    <div class="timeline-card" aria-hidden="true">
+                        <span class="card-tag">School</span>
+                        <h3>Highland High School</h3>
+                        <p class="card-role">CLASS OF '27</p>
+                        <span class="card-location">Palmdale, CA</span>
+                    </div>
+
+                    <div class="timeline-card" aria-hidden="true">
+                        <span class="card-tag">School</span>
+                        <h3>Highland High School</h3>
+                        <p class="card-role">CLASS OF '27</p>
+                        <span class="card-location">Palmdale, CA</span>
+                    </div>
+
+                    <div class="timeline-card" aria-hidden="true">
+                        <span class="card-tag">School</span>
+                        <h3>Highland High School</h3>
+                        <p class="card-role">CLASS OF '27</p>
+                        <span class="card-location">Palmdale, CA</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

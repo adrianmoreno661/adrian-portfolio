@@ -1,0 +1,349 @@
+/* Disable vertical scroll snap on the projects archive page */
+html {
+    scroll-snap-type: none;
+}
+
+.projects-page {
+    padding-top: 140px;
+    padding-bottom: 5rem;
+    min-height: 100vh;
+}
+
+/* HEADER & FILTER CONTROLS */
+.projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #232326;
+}
+
+.subtitle {
+    margin: 0;
+    font-size: 1rem;
+    color: #94A3B8;
+}
+
+.controls-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.search-input {
+    background-color: #121213;
+    border: 1px solid #2d2d30;
+    color: #E2E8F0;
+    padding: 0.65rem 1rem;
+    border-radius: 4px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.9rem;
+    width: 280px;
+    transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #DC2626;
+}
+
+.filter-bar {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background-color: transparent;
+    color: #94A3B8;
+    border: 1px solid #2d2d30;
+    padding: 0.55rem 1.1rem;
+    border-radius: 4px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    border-color: #DC2626;
+    color: #DC2626;
+}
+
+.filter-btn.active {
+    background-color: #DC2626;
+    border-color: #DC2626;
+    color: #161617;
+    font-weight: 700;
+}
+
+/* STATUS MESSAGE */
+.status-msg {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1rem;
+    color: #94A3B8;
+    display: none;
+}
+
+/* PROJECTS GRID */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 2.5rem;
+}
+
+/* PROJECT CARD */
+.project-card {
+    background-color: #121213;
+    border: 1px solid #232326;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    border-color: #DC2626;
+}
+
+.card-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background-color: #202023;
+    overflow: hidden;
+}
+
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .card-image-wrapper img {
+    transform: scale(1.05);
+}
+
+/* STATUS BADGES */
+.status-badge {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    background-color: rgba(22, 22, 23, 0.92);
+    border: 1px solid #2d2d30;
+}
+
+.card-image-wrapper .status-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+.status-badge.ideas {
+    color: #38BDF8;
+    border-color: #38BDF8;
+}
+
+.status-badge.in-progress {
+    color: #FACC15;
+    border-color: #FACC15;
+}
+
+.status-badge.complete {
+    color: #4ADE80;
+    border-color: #4ADE80;
+}
+
+/* CARD BODY */
+.card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-date {
+    font-size: 0.75rem;
+    color: #64748B;
+    margin-bottom: 0.4rem;
+}
+
+.card-title {
+    color: #DC2626;
+    font-family: "Audiowide", sans-serif;
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem 0;
+}
+
+.card-desc {
+    color: #94A3B8;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    margin: 0 0 1.25rem 0;
+    flex-grow: 1;
+}
+
+/* TAGS */
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tag {
+    background-color: #202023;
+    color: #94A3B8;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 4px;
+    border: 1px solid #2d2d30;
+}
+
+/* CARD BUTTONS */
+.card-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.card-btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background-color: transparent;
+    color: #DC2626;
+    border: 1px solid #DC2626;
+    border-radius: 4px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.card-btn:hover {
+    background-color: #DC2626;
+    color: #161617;
+}
+
+/* MODAL POPUP */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    z-index: 200;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal-box {
+    background-color: #161617;
+    border: 1px solid #DC2626;
+    border-radius: 12px;
+    max-width: 680px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(22, 22, 23, 0.9);
+    color: #E2E8F0;
+    border: 1px solid #2d2d30;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    border-color: #DC2626;
+    color: #DC2626;
+}
+
+.modal-image {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+}
+
+.modal-content {
+    padding: 2rem;
+}
+
+.modal-title {
+    color: #DC2626;
+    font-family: "Audiowide", sans-serif;
+    font-size: 1.6rem;
+    margin: 0.75rem 0 0.4rem 0;
+}
+
+.modal-date {
+    font-size: 0.8rem;
+    color: #64748B;
+    margin: 0 0 1rem 0;
+}
+
+.modal-desc {
+    color: #CBD5E1;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin: 0 0 1.5rem 0;
+}
+
+.modal-actions .cta-btn {
+    margin-top: 0.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .projects-page {
+        padding-top: 110px;
+    }
+
+    .controls-wrapper {
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-image {
+        height: 200px;
+    }
+}

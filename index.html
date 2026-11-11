@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.svg">
+    <title>Adrian Moreno | Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION BAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <div class="logo">AM.</div>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <label for="menu-toggle" class="burger-label">
+                Menu
+            </label>
+
+            <nav class="nav-links">
+
+                <a href="index.html" class="active">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact Me!</a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HOME / HERO SECTION
+    ========================== -->
+
+    <main class="welcome_card">
+
+        <div class="container hero-layout">
+
+            <section class="name_job">
+
+                <h1 class="name">Adrian Moreno</h1>
+
+                <h4 class="job">Mechanical Engineering Student</h4>
+
+                <!-- Social Links -->
+
+                <div class="socials">
+
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                        <img class="github" src="github.svg" alt="GitHub Logo">
+                    </a>
+
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                        <img class="linkedin" src="linkedin.svg" alt="LinkedIn Logo">
+                    </a>
+
+                </div>
+
+                <!-- Explore Button -->
+
+                <a href="#about_section" class="cta-btn">
+
+                    Explore More!
+
+                    <span class="arrow">↓</span>
+
+                </a>
+
+            </section>
+
+
+            <!-- Hero Image -->
+
+            <section class="hero_container">
+
+                <img
+                    class="hero_image"
+                    src="Adrian Moreno.jpg"
+                    alt="Adrian Moreno working with drone technology"
+                >
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         ABOUT ME SECTION
+    ========================== -->
+
+    <section id="about_section" class="about_me">
+
+        <div class="container about-layout">
+
+            <!-- About Text -->
+
+            <div class="about_content">
+
+                <h1 class="title">About me:</h1>
+
+                <p class="info">
+
+                    this is a test. i want to know if this is working.
+                    test test test test test test this is a test can i make
+                    this any better i can keep nvm i had to stop here to
+                    make the break look good is this good? alright we are
+                    going to end the test soon i want to get up to five lines!
+                    if you like what i do you can
+                    <b><u>contact me!</u></b>
+                    nice its all looking good! Adrian over and out! ggs
+
+                </p>
+
+                <img
+                    class="signature"
+                    src="signature-white.png"
+                    alt="Adrian Moreno's signature"
+                >
+
+            </div>
+
+
+            <!-- Automatic Image Slideshow -->
+
+            <div class="about_image_container">
+
+                <div class="about_slider">
+
+                    <img
+                        class="about_image"
+                        src="Adrian_fixing_drone.jpg"
+                        alt="Adrian working on a drone"
+                    >
+
+                    <img
+                        class="about_image"
+                        src="images.jpeg"
+                        alt="Drone assembly setup"
+                    >
+
+                    <img
+                        class="about_image"
+                        src="cad-design.jpg"
+                        alt="3D CAD mechanical drawing"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RECENT PROJECTS SECTION
+    ========================== -->
+
+    <section id="recent_projects" class="recent_projects">
+
+        <div class="container projects-layout">
+
+            <h1 class="title">Recent Projects:</h1>
+
+            <div class="pipeline-grid">
+
+
+                <!-- IDEAS -->
+
+                <div class="pipeline-column">
+
+                    <h3 class="column-header">Ideas</h3>
+
+                    <a href="projects.html" class="pipeline-card">
+
+                        <div class="pipeline-card-inner">
+
+                            <div class="pipeline-card-front">
+
+                                <img
+                                    src="cad-design.jpg"
+                                    alt="Idea Project"
+                                >
+
+                                <span class="card-hint">
+                                    View Details ↗
+                                </span>
+
+                            </div>
+
+                            <div class="pipeline-card-back">
+
+                                <h3>Future Concepts</h3>
+
+                                <p>
+                                    Ideas and concepts currently being explored,
+                                    designed, and developed.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+                <!-- IN PROGRESS -->
+
+                <div class="pipeline-column">
+
+                    <h3 class="column-header">In-Progress</h3>
+
+                    <a href="projects.html" class="pipeline-card">
+
+                        <div class="pipeline-card-inner">
+
+                            <div class="pipeline-card-front">
+
+                                <img
+                                    src="images.jpeg"
+                                    alt="In-Progress Project"
+                                >
+
+                                <span class="card-hint">
+                                    View Details ↗
+                                </span>
+
+                            </div>
+
+                            <div class="pipeline-card-back">
+
+                                <h3>Current Builds</h3>
+
+                                <p>
+                                    Projects currently being designed,
+                                    assembled, and tested.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+                <!-- COMPLETE -->
+
+                <div class="pipeline-column">
+
+                    <h3 class="column-header">Complete</h3>
+
+                    <a href="projects.html" class="pipeline-card">
+
+                        <div class="pipeline-card-inner">
+
+                            <div class="pipeline-card-front">
+
+                                <img
+                                    src="Adrian_fixing_drone.jpg"
+                                    alt="Completed Project"
+                                >
+
+                                <span class="card-hint">
+                                    View Details ↗
+                                </span>
+
+                            </div>
+
+                            <div class="pipeline-card-back">
+
+                                <h3>Completed Builds</h3>
+
+                                <p>
+                                    Finished projects, experiments,
+                                    prototypes, and designs.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>
