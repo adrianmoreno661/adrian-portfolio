@@ -6,35 +6,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AM Motorsport | Engineering Operations</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.svg">
 
-    <link rel="stylesheet" href="admin.css">
+    <title>AM Motorsport | Engineering Operations</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>
 
-    <!-- LOGIN SCREEN -->
+    <!-- =========================
+         LOGIN SCREEN
+    ========================== -->
+
     <section id="login-screen" class="login-screen">
+
+        <div class="login-background-mark">AM.</div>
 
         <div class="login-panel">
 
-            <div class="login-topline">
-                <div class="admin-logo">AM<span>.</span></div>
-                <span class="login-system-label">TEAM ACCESS / 01</span>
-            </div>
+            <div class="admin-logo">AM.</div>
 
-            <div class="login-accent"></div>
+            <p class="brand-caption">MOTORSPORT ENGINEERING</p>
 
-            <p class="eyebrow">AM MOTORSPORT / ENGINEERING OPERATIONS</p>
+            <div class="login-divider"></div>
 
-            <h1>Team Login<span>.</span></h1>
+            <p class="team-classification">
+                ENGINEERING OPERATIONS / SECURE ACCESS
+            </p>
 
-            <p class="section-description">
-                Authorized access to the engineering portfolio system.
+            <h1>Team Login</h1>
+
+            <p class="login-description">
+                Sign in to access the engineering management system.
             </p>
 
             <form id="login-form">
@@ -44,7 +54,6 @@
                     type="email"
                     id="login-email"
                     placeholder="Enter your email"
-                    autocomplete="username"
                     required
                 >
 
@@ -53,49 +62,50 @@
                     type="password"
                     id="login-password"
                     placeholder="Enter your password"
-                    autocomplete="current-password"
                     required
                 >
 
                 <button type="submit" id="login-button">
-                    <span>Access System</span>
-                    <span aria-hidden="true">↗</span>
+                    ACCESS SYSTEM
                 </button>
 
-                <p id="login-error" role="alert"></p>
+                <p id="login-error"></p>
 
             </form>
 
             <div class="login-footer">
-                <span>AM / ENGINEERING DIVISION</span>
-                <span>RESTRICTED ACCESS</span>
+                AM MOTORSPORT / INTERNAL SYSTEM
             </div>
 
         </div>
 
-        <div class="login-background-mark" aria-hidden="true">AM</div>
-
     </section>
 
 
-    <!-- ADMIN DASHBOARD -->
-    <div id="admin-app" hidden>
+    <!-- =========================
+         ADMIN APPLICATION
+    ========================== -->
+
+    <div id="admin-app" class="admin-app" hidden>
 
         <!-- SIDEBAR -->
+
         <aside class="sidebar">
 
             <div class="sidebar-brand">
-                <div class="admin-logo">AM<span>.</span></div>
 
-                <div class="brand-caption">
-                    <strong>MOTORSPORT</strong>
-                    <span>ENGINEERING DIVISION</span>
+                <div class="admin-logo">AM.</div>
+
+                <div>
+                    <p class="brand-caption">MOTORSPORT</p>
+                    <p class="brand-caption">ENGINEERING</p>
                 </div>
+
             </div>
 
             <div class="team-classification">
                 <span class="classification-dot"></span>
-                PRIVATE TEAM ENVIRONMENT
+                ENGINEERING DIVISION
             </div>
 
             <div class="sidebar-divider"></div>
@@ -106,23 +116,26 @@
 
                 <a href="#dashboard" class="active">
                     <span class="nav-index">00</span>
-                    <span>Overview</span>
+                    Dashboard
                     <span class="nav-indicator"></span>
                 </a>
 
                 <a href="#projects">
                     <span class="nav-index">01</span>
-                    <span>Project Register</span>
+                    Projects
+                    <span class="nav-indicator"></span>
                 </a>
 
                 <a href="#capabilities">
                     <span class="nav-index">02</span>
-                    <span>Capabilities</span>
+                    Capabilities
+                    <span class="nav-indicator"></span>
                 </a>
 
                 <a href="#timeline">
                     <span class="nav-index">03</span>
-                    <span>Development History</span>
+                    Development History
+                    <span class="nav-indicator"></span>
                 </a>
 
             </nav>
@@ -130,23 +143,19 @@
             <div class="sidebar-spacer"></div>
 
             <div class="sidebar-division">
-                <span class="division-line"></span>
-                <span>ENGINEERING / DESIGN / DEVELOPMENT</span>
+                <div class="division-line"></div>
+                <p>AM / TECHNICAL DIVISION</p>
             </div>
 
             <div class="sidebar-bottom">
 
                 <div class="sidebar-system">
                     <span class="system-indicator"></span>
-                    <div>
-                        <strong>SYSTEM ONLINE</strong>
-                        <small>FIREBASE CONNECTION</small>
-                    </div>
+                    SYSTEM ONLINE
                 </div>
 
                 <a href="../index.html" class="portfolio-link">
-                    <span>↗</span>
-                    View Public Portfolio
+                    VIEW PUBLIC PORTFOLIO ↗
                 </a>
 
             </div>
@@ -155,34 +164,32 @@
 
 
         <!-- MAIN CONTENT -->
+
         <main class="main-content">
 
-            <!-- TOP HEADER -->
+            <!-- TOPBAR -->
+
             <header class="topbar">
 
-                <div class="topbar-heading">
-                    <div class="breadcrumb">
-                        <span>AM MOTORSPORT</span>
-                        <span class="breadcrumb-divider">/</span>
-                        <span>OPERATIONS</span>
-                    </div>
+                <div>
+                    <p class="breadcrumb">
+                        AM MOTORSPORT / <span>OPERATIONS</span>
+                    </p>
 
-                    <h1>Engineering Hub<span>.</span></h1>
+                    <h1 class="topbar-heading">
+                        Engineering Control
+                    </h1>
                 </div>
 
                 <div class="topbar-actions">
 
                     <div class="admin-status">
                         <span class="system-indicator"></span>
-                        AUTHORIZED
+                        SYSTEM ACTIVE
                     </div>
 
-                    <button
-                        type="button"
-                        id="logout-button"
-                        class="logout-button"
-                    >
-                        Sign Out <span>↗</span>
+                    <button id="logout-button">
+                        LOG OUT ↗
                     </button>
 
                 </div>
@@ -190,216 +197,109 @@
             </header>
 
 
-            <!-- DASHBOARD OVERVIEW -->
-            <section id="dashboard" class="dashboard-section">
+            <!-- DASHBOARD -->
+
+            <section id="dashboard" class="admin-section">
 
                 <div class="operations-banner">
 
                     <div class="operations-copy">
-                        <p class="eyebrow">
-                            ENGINEERING DIVISION
-                            <span class="eyebrow-divider">/</span>
-                            OPERATIONS OVERVIEW
+
+                        <p class="panel-kicker">
+                            AM / ENGINEERING OPERATIONS
                         </p>
 
-                        <h2>Ideas into<br><span>engineering.</span></h2>
+                        <h2>
+                            Engineering<br>
+                            <span>Control Center.</span>
+                        </h2>
 
-                        <p class="section-description">
-                            Your central workspace for projects, technical capabilities,
-                            and development milestones.
+                        <p>
+                            Manage projects, technical capabilities,
+                            and development history from one central system.
                         </p>
+
                     </div>
 
-                    <div class="operations-graphic" aria-hidden="true">
+                    <div class="operations-graphic">
+
                         <div class="graphic-ring graphic-ring-one"></div>
                         <div class="graphic-ring graphic-ring-two"></div>
-                        <div class="graphic-core">AM<span>.</span></div>
-                        <span class="graphic-coordinate graphic-coordinate-one">AM / 01</span>
-                        <span class="graphic-coordinate graphic-coordinate-two">ENGINEERING</span>
-                        <span class="graphic-crosshair"></span>
+                        <div class="graphic-ring graphic-ring-three"></div>
+
+                        <div class="graphic-core">
+                            AM
+                        </div>
+
+                        <div class="graphic-coordinate coordinate-one">
+                            34°N
+                        </div>
+
+                        <div class="graphic-coordinate coordinate-two">
+                            118°W
+                        </div>
+
+                        <div class="graphic-crosshair"></div>
+
                     </div>
 
                     <div class="banner-footer">
-                        <span>DESIGN • BUILD • DEVELOP</span>
-                        <span>TEAM SYSTEM / 001</span>
+                        <span>ENGINEERING DIVISION</span>
+                        <span>AM-OPS / 001</span>
                     </div>
 
-                </div>
-
-
-                <div class="overview-heading">
-                    <div>
-                        <p class="eyebrow">WORKSPACE DIRECTORY</p>
-                        <h2>Department access</h2>
-                    </div>
-
-                    <span class="overview-reference">REF / AM-OPS-001</span>
-                </div>
-
-
-                <div class="dashboard-grid">
-
-                    <a href="#projects" class="dashboard-card project-card">
-
-                        <div class="dashboard-card-top">
-                            <span class="card-index">01 / DEVELOPMENT</span>
-                            <span class="card-arrow">↗</span>
-                        </div>
-
-                        <div class="card-icon">01</div>
-
-                        <div>
-                            <h3>Project Register</h3>
-                            <p>
-                                Track concepts, active builds, and completed engineering projects.
-                            </p>
-                        </div>
-
-                        <div class="card-footer">
-                            <span>PROJECT DATABASE</span>
-                            <span>OPEN REGISTER ↗</span>
-                        </div>
-
-                    </a>
-
-
-                    <a href="#projects" class="dashboard-card media-card">
-
-                        <div class="dashboard-card-top">
-                            <span class="card-index">02 / DOCUMENTATION</span>
-                            <span class="card-arrow">↗</span>
-                        </div>
-
-                        <div class="card-icon">02</div>
-
-                        <div>
-                            <h3>Project Content</h3>
-                            <p>
-                                Maintain project descriptions and the information shown publicly.
-                            </p>
-                        </div>
-
-                        <div class="card-footer">
-                            <span>PROJECT DETAILS</span>
-                            <span>OPEN CONTENT ↗</span>
-                        </div>
-
-                    </a>
-
-
-                    <a href="#capabilities" class="dashboard-card capabilities-card">
-
-                        <div class="dashboard-card-top">
-                            <span class="card-index">03 / TECHNICAL</span>
-                            <span class="card-arrow">↗</span>
-                        </div>
-
-                        <div class="card-icon">03</div>
-
-                        <div>
-                            <h3>Capabilities</h3>
-                            <p>
-                                Maintain your technical skills, tools, and engineering abilities.
-                            </p>
-                        </div>
-
-                        <div class="card-footer">
-                            <span>SKILLS DATABASE</span>
-                            <span>OPEN PROFILE ↗</span>
-                        </div>
-
-                    </a>
-
-
-                    <a href="#timeline" class="dashboard-card timeline-card">
-
-                        <div class="dashboard-card-top">
-                            <span class="card-index">04 / EXPERIENCE</span>
-                            <span class="card-arrow">↗</span>
-                        </div>
-
-                        <div class="card-icon">04</div>
-
-                        <div>
-                            <h3>Development History</h3>
-                            <p>
-                                Record education, experience, and important milestones.
-                            </p>
-                        </div>
-
-                        <div class="card-footer">
-                            <span>CAREER TIMELINE</span>
-                            <span>OPEN HISTORY ↗</span>
-                        </div>
-
-                    </a>
-
-                </div>
-
-
-                <div class="dashboard-note">
-                    <span class="note-mark">i</span>
-
-                    <p>
-                        <strong>DATA SYNCHRONIZATION</strong>
-                        Changes made in this workspace are stored in Firebase and reflected
-                        across the connected public portfolio.
-                    </p>
-
-                    <span class="note-status">LIVE DATABASE</span>
                 </div>
 
             </section>
 
 
             <!-- PROJECT MANAGEMENT -->
-            <section id="projects" class="management-section">
+
+            <section id="projects" class="admin-section management-section">
 
                 <div class="section-heading">
 
                     <div>
-                        <p class="eyebrow">ENGINEERING DIVISION / 01</p>
-                        <h2>Project Register<span>.</span></h2>
-                        <p class="section-description">
-                            Document and manage concepts, active builds, and completed work.
-                        </p>
+                        <p class="section-number">01 / DEVELOPMENT</p>
+                        <h2>Project Management</h2>
                     </div>
 
-                    <div class="section-reference">
-                        <span>DEPARTMENT</span>
-                        <strong>PROJECT DEVELOPMENT</strong>
-                        <span class="section-number">01</span>
-                    </div>
+                    <p class="section-reference">
+                        REF / PROJECT DATABASE
+                    </p>
 
                 </div>
 
-
                 <div class="management-layout">
+
+                    <!-- ADD PROJECT -->
 
                     <div class="management-panel form-panel">
 
                         <div class="panel-heading">
-                            <span class="panel-kicker">CREATE RECORD</span>
-                            <span class="panel-code">PRJ / NEW</span>
+                            <p class="panel-kicker">DATABASE ENTRY / 01</p>
+                            <span class="panel-code">PRJ-NEW</span>
                         </div>
 
                         <div class="panel-title-row">
                             <span class="panel-title-mark"></span>
-                            <h3>New Project Entry</h3>
+                            <h3>Register Project</h3>
                         </div>
 
                         <p class="panel-description">
-                            Register a new engineering project in the database.
+                            Add a new project to the engineering portfolio.
                         </p>
+
+                        <div class="database-divider"></div>
 
                         <label for="project-name">PROJECT NAME</label>
                         <input
                             type="text"
                             id="project-name"
-                            placeholder="Example: Custom Drone"
+                            placeholder="Enter project name"
                         >
 
-                        <label for="project-status">DEVELOPMENT STATUS</label>
+                        <label for="project-status">PROJECT STATUS</label>
                         <select id="project-status">
                             <option value="Ideas">Ideas</option>
                             <option value="In Progress">In Progress</option>
@@ -409,45 +309,43 @@
                         <label for="project-description">PROJECT DESCRIPTION</label>
                         <textarea
                             id="project-description"
-                            placeholder="Describe the project, its purpose, and development..."
+                            placeholder="Describe the project..."
+                            rows="5"
                         ></textarea>
 
-                        <button type="button" id="add-project" class="primary-button">
-                            <span>Register Project</span>
-                            <span>↗</span>
+                        <button id="add-project">
+                            ADD PROJECT +
                         </button>
 
-                        <div class="form-footnote">
-                            <span>ENTRY TYPE / PROJECT</span>
-                            <span>DATABASE WRITE</span>
-                        </div>
+                        <p class="form-footnote">
+                            ENTRY WILL BE SAVED TO THE PROJECT DATABASE.
+                        </p>
 
                     </div>
 
 
+                    <!-- PROJECT LIST -->
+
                     <div class="management-panel list-panel">
 
                         <div class="panel-heading">
-                            <span class="panel-kicker">ENGINEERING RECORDS</span>
-                            <span class="panel-code">LIVE DATA</span>
+                            <p class="panel-kicker">DATABASE RECORDS / 01</p>
+                            <span class="panel-code">PRJ-REG</span>
                         </div>
 
                         <div class="panel-title-row">
-                            <span class="panel-title-mark accent-orange"></span>
-                            <h3>Registered Projects</h3>
+                            <span class="panel-title-mark"></span>
+                            <h3>Project Register</h3>
                         </div>
 
                         <p class="panel-description">
-                            Review, edit, and maintain your project records.
+                            Review and manage existing engineering projects.
                         </p>
 
-                        <div class="database-divider">
-                            <span>RECORDS / ALL ENTRIES</span>
-                            <span>PROJECT DATABASE</span>
-                        </div>
+                        <div class="database-divider"></div>
 
                         <div id="project-list">
-                            <p class="empty-message">No projects added yet.</p>
+                            <!-- Projects are loaded from Firebase -->
                         </div>
 
                     </div>
@@ -458,88 +356,84 @@
 
 
             <!-- CAPABILITIES MANAGEMENT -->
-            <section id="capabilities" class="management-section">
+
+            <section id="capabilities" class="admin-section management-section">
 
                 <div class="section-heading">
 
                     <div>
-                        <p class="eyebrow">ENGINEERING DIVISION / 02</p>
-                        <h2>Capabilities<span>.</span></h2>
-                        <p class="section-description">
-                            Maintain the technical skills and abilities displayed on your resume.
-                        </p>
+                        <p class="section-number">02 / TECHNICAL</p>
+                        <h2>Capabilities</h2>
                     </div>
 
-                    <div class="section-reference">
-                        <span>DEPARTMENT</span>
-                        <strong>TECHNICAL DEVELOPMENT</strong>
-                        <span class="section-number">02</span>
-                    </div>
+                    <p class="section-reference">
+                        REF / SKILLS DATABASE
+                    </p>
 
                 </div>
 
-
                 <div class="management-layout">
+
+                    <!-- ADD SKILL -->
 
                     <div class="management-panel form-panel">
 
                         <div class="panel-heading">
-                            <span class="panel-kicker">CREATE RECORD</span>
-                            <span class="panel-code">SKL / NEW</span>
+                            <p class="panel-kicker">DATABASE ENTRY / 02</p>
+                            <span class="panel-code">SKL-NEW</span>
                         </div>
 
                         <div class="panel-title-row">
                             <span class="panel-title-mark"></span>
-                            <h3>New Capability</h3>
+                            <h3>Add Capability</h3>
                         </div>
 
                         <p class="panel-description">
-                            Add a technical skill or capability to your profile.
+                            Add technical skills, tools, and engineering abilities.
                         </p>
 
-                        <label for="skill-name">CAPABILITY NAME</label>
+                        <div class="database-divider"></div>
+
+                        <label for="skill-name">SKILL NAME</label>
                         <input
                             type="text"
                             id="skill-name"
-                            placeholder="Example: 3D CAD Modeling"
+                            placeholder="Enter skill name"
                         >
 
-                        <button type="button" id="add-skill" class="primary-button">
-                            <span>Register Capability</span>
-                            <span>↗</span>
+                        <button id="add-skill">
+                            ADD CAPABILITY +
                         </button>
 
-                        <div class="form-footnote">
-                            <span>ENTRY TYPE / SKILL</span>
-                            <span>DATABASE WRITE</span>
-                        </div>
+                        <p class="form-footnote">
+                            NEW SKILLS WILL APPEAR ON THE PUBLIC RESUME.
+                        </p>
 
                     </div>
 
 
+                    <!-- SKILL LIST -->
+
                     <div class="management-panel list-panel">
 
                         <div class="panel-heading">
-                            <span class="panel-kicker">TECHNICAL RECORDS</span>
-                            <span class="panel-code">LIVE DATA</span>
+                            <p class="panel-kicker">DATABASE RECORDS / 02</p>
+                            <span class="panel-code">SKL-REG</span>
                         </div>
 
                         <div class="panel-title-row">
-                            <span class="panel-title-mark accent-teal"></span>
-                            <h3>Registered Capabilities</h3>
+                            <span class="panel-title-mark"></span>
+                            <h3>Capability Register</h3>
                         </div>
 
                         <p class="panel-description">
-                            Review and manage the skills listed on your resume.
+                            Review and manage your technical capabilities.
                         </p>
 
-                        <div class="database-divider">
-                            <span>RECORDS / ALL ENTRIES</span>
-                            <span>SKILLS DATABASE</span>
-                        </div>
+                        <div class="database-divider"></div>
 
                         <div id="skill-list">
-                            <p class="empty-message">No skills added yet.</p>
+                            <!-- Skills are loaded from Firebase -->
                         </div>
 
                     </div>
@@ -549,112 +443,106 @@
             </section>
 
 
-            <!-- TIMELINE MANAGEMENT -->
-            <section id="timeline" class="management-section">
+            <!-- DEVELOPMENT HISTORY -->
+
+            <section id="timeline" class="admin-section management-section">
 
                 <div class="section-heading">
 
                     <div>
-                        <p class="eyebrow">ENGINEERING DIVISION / 03</p>
-                        <h2>Development History<span>.</span></h2>
-                        <p class="section-description">
-                            Record education, internships, work, and professional milestones.
-                        </p>
+                        <p class="section-number">03 / EXPERIENCE</p>
+                        <h2>Development History</h2>
                     </div>
 
-                    <div class="section-reference">
-                        <span>DEPARTMENT</span>
-                        <strong>EXPERIENCE &amp; EDUCATION</strong>
-                        <span class="section-number">03</span>
-                    </div>
+                    <p class="section-reference">
+                        REF / CAREER TIMELINE
+                    </p>
 
                 </div>
 
-
                 <div class="management-layout">
+
+                    <!-- ADD TIMELINE ENTRY -->
 
                     <div class="management-panel form-panel">
 
                         <div class="panel-heading">
-                            <span class="panel-kicker">CREATE RECORD</span>
-                            <span class="panel-code">TML / NEW</span>
+                            <p class="panel-kicker">DATABASE ENTRY / 03</p>
+                            <span class="panel-code">EXP-NEW</span>
                         </div>
 
                         <div class="panel-title-row">
                             <span class="panel-title-mark"></span>
-                            <h3>New Milestone</h3>
+                            <h3>Record Milestone</h3>
                         </div>
 
                         <p class="panel-description">
-                            Add an education, work, or experience milestone.
+                            Record education, work experience, and important milestones.
                         </p>
 
-                        <label for="timeline-category">ENTRY CLASSIFICATION</label>
+                        <div class="database-divider"></div>
+
+                        <label for="timeline-category">CATEGORY</label>
                         <select id="timeline-category">
                             <option value="School">School</option>
                             <option value="Internship">Internship</option>
                             <option value="Work">Work</option>
                         </select>
 
-                        <label for="timeline-name">ORGANIZATION / NAME</label>
+                        <label for="timeline-name">ORGANIZATION / SCHOOL</label>
                         <input
                             type="text"
                             id="timeline-name"
-                            placeholder="Example: Highland High School"
+                            placeholder="Enter organization or school"
                         >
 
-                        <label for="timeline-role">ROLE / DESCRIPTION</label>
+                        <label for="timeline-role">ROLE / PROGRAM</label>
                         <input
                             type="text"
                             id="timeline-role"
-                            placeholder="Example: CLASS OF '27"
+                            placeholder="Enter role or program"
                         >
 
-                        <label for="timeline-location">LOCATION</label>
+                        <label for="timeline-location">LOCATION / DATE</label>
                         <input
                             type="text"
                             id="timeline-location"
-                            placeholder="Example: Palmdale, CA"
+                            placeholder="Enter location or date"
                         >
 
-                        <button type="button" id="add-timeline" class="primary-button">
-                            <span>Register Milestone</span>
-                            <span>↗</span>
+                        <button id="add-timeline">
+                            ADD MILESTONE +
                         </button>
 
-                        <div class="form-footnote">
-                            <span>ENTRY TYPE / HISTORY</span>
-                            <span>DATABASE WRITE</span>
-                        </div>
+                        <p class="form-footnote">
+                            MILESTONES WILL APPEAR ON THE PUBLIC RESUME.
+                        </p>
 
                     </div>
 
 
+                    <!-- TIMELINE LIST -->
+
                     <div class="management-panel list-panel">
 
                         <div class="panel-heading">
-                            <span class="panel-kicker">EXPERIENCE RECORDS</span>
-                            <span class="panel-code">LIVE DATA</span>
+                            <p class="panel-kicker">DATABASE RECORDS / 03</p>
+                            <span class="panel-code">EXP-REG</span>
                         </div>
 
                         <div class="panel-title-row">
-                            <span class="panel-title-mark accent-orange"></span>
-                            <h3>Development Timeline</h3>
+                            <span class="panel-title-mark"></span>
+                            <h3>Milestone Register</h3>
                         </div>
 
                         <p class="panel-description">
-                            Review and manage your education and experience history.
+                            Review and manage your development history.
                         </p>
 
-                        <div class="database-divider">
-                            <span>RECORDS / ALL ENTRIES</span>
-                            <span>HISTORY DATABASE</span>
-                        </div>
+                        <div class="database-divider"></div>
 
                         <div id="timeline-list">
-                            <p class="empty-message">
-                                No timeline entries added yet.
-                            </p>
+                            <!-- Timeline entries are loaded from Firebase -->
                         </div>
 
                     </div>
@@ -665,14 +553,21 @@
 
 
             <!-- FOOTER -->
+
             <footer class="admin-footer">
+
                 <div class="footer-brand">
-                    <strong>AM<span>.</span></strong>
-                    <span>MOTORSPORT / ENGINEERING DIVISION</span>
+                    AM. / MOTORSPORT ENGINEERING
                 </div>
 
-                <span>ENGINEERING OPERATIONS SYSTEM</span>
-                <span>END OF WORKSPACE</span>
+                <p>
+                    ENGINEERING OPERATIONS SYSTEM
+                </p>
+
+                <p>
+                    INTERNAL USE / AM-OPS-001
+                </p>
+
             </footer>
 
         </main>
@@ -680,7 +575,8 @@
     </div>
 
 
-    <!-- FIREBASE / ADMIN JAVASCRIPT -->
+    <!-- FIREBASE ADMIN LOGIC -->
+
     <script type="module" src="admin.js"></script>
 
 </body>
