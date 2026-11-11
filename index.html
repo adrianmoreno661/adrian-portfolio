@@ -5,7 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <meta name="theme-color" content="#161617">
+    <meta name="description" content="Adrian Moreno's mechanical engineering portfolio, featuring projects, designs, and engineering interests.">
+
     <title>Adrian Moreno | Portfolio</title>
 
     <!-- Google Fonts -->
@@ -36,7 +41,7 @@
                 Menu
             </label>
 
-            <nav class="nav-links">
+            <nav class="nav-links" id="primary-navigation" aria-label="Main navigation">
 
                 <a href="index.html" class="active">Home</a>
                 <a href="projects.html">Projects</a>
@@ -68,12 +73,12 @@
 
                 <div class="socials">
 
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-                        <img class="github" src="assets/github.svg" alt="GitHub Logo">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <img class="github" src="assets/github.svg" alt="">
                     </a>
 
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                        <img class="linkedin" src="assets/linkedin.svg" alt="LinkedIn Logo">
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <img class="linkedin" src="assets/linkedin.svg" alt="">
                     </a>
 
                 </div>
@@ -81,11 +86,8 @@
                 <!-- Explore Button -->
 
                 <a href="#about_section" class="cta-btn">
-
                     Explore More!
-
                     <span class="arrow">↓</span>
-
                 </a>
 
             </section>
@@ -99,6 +101,7 @@
                     class="hero_image"
                     src="assets/Adrian Moreno.jpg"
                     alt="Adrian Moreno working with drone technology"
+                    fetchpriority="high"
                 >
 
             </section>
@@ -120,7 +123,7 @@
 
             <div class="about_content">
 
-                <h1 class="title">About me:</h1>
+                <h2 class="title">About me:</h2>
 
                 <p class="info">
 
@@ -130,7 +133,7 @@
                     make the break look good is this good? alright we are
                     going to end the test soon i want to get up to five lines!
                     if you like what i do you can
-                    <b><u>contact me!</u></b>
+                    <a href="contact.html"><b><u>contact me!</u></b></a>
                     nice its all looking good! Adrian over and out! ggs
 
                 </p>
@@ -139,6 +142,7 @@
                     class="signature"
                     src="assets/signature-white.png"
                     alt="Adrian Moreno's signature"
+                    loading="lazy"
                 >
 
             </div>
@@ -154,18 +158,21 @@
                         class="about_image"
                         src="Adrian_fixing_drone.jpg"
                         alt="Adrian working on a drone"
+                        loading="lazy"
                     >
 
                     <img
                         class="about_image"
                         src="images.jpeg"
                         alt="Drone assembly setup"
+                        loading="lazy"
                     >
 
                     <img
                         class="about_image"
                         src="cad-design.jpg"
                         alt="3D CAD mechanical drawing"
+                        loading="lazy"
                     >
 
                 </div>
@@ -185,10 +192,9 @@
 
         <div class="container projects-layout">
 
-            <h1 class="title">Recent Projects:</h1>
+            <h2 class="title">Recent Projects:</h2>
 
             <div class="pipeline-grid">
-
 
                 <!-- IDEAS -->
 
@@ -205,6 +211,7 @@
                                 <img
                                     src="cad-design.jpg"
                                     alt="Idea Project"
+                                    loading="lazy"
                                 >
 
                                 <span class="card-hint">
@@ -246,6 +253,7 @@
                                 <img
                                     src="images.jpeg"
                                     alt="In-Progress Project"
+                                    loading="lazy"
                                 >
 
                                 <span class="card-hint">
@@ -287,6 +295,7 @@
                                 <img
                                     src="Adrian_fixing_drone.jpg"
                                     alt="Completed Project"
+                                    loading="lazy"
                                 >
 
                                 <span class="card-hint">
@@ -312,13 +321,18 @@
 
                 </div>
 
-
             </div>
 
         </div>
 
     </section>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
     <script type="module" src="main.js"></script>
+
 </body>
 </html>
-
