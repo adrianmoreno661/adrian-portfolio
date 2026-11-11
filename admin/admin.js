@@ -13,7 +13,8 @@ import {
     addDoc,
     updateDoc,
     deleteDoc,
-    doc
+    doc,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 
@@ -139,7 +140,6 @@ async function migrateOldData() {
             collection(db, migration.collectionName)
         );
 
-        // Only import if this Firebase collection is empty.
         if (!existing.empty) continue;
 
         const entries = JSON.parse(oldData);
@@ -257,12 +257,17 @@ addProjectButton.addEventListener("click", async () => {
 
     try {
         if (editingProjectId) {
+            // Editing preserves the original creation timestamp.
             await updateDoc(
                 doc(db, "projects", editingProjectId),
                 project
             );
         } else {
-            await addDoc(collection(db, "projects"), project);
+            // New projects receive a Firebase creation timestamp.
+            await addDoc(collection(db, "projects"), {
+                ...project,
+                createdAt: serverTimestamp()
+            });
         }
 
         cancelProjectEditing();
