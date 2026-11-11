@@ -1,15 +1,23 @@
-/* Disable vertical scroll snap on the projects archive page */
+
+/* =========================
+   PROJECTS PAGE
+========================= */
+
 html {
     scroll-snap-type: none;
 }
 
 .projects-page {
+    width: 100%;
+    min-height: 100vh;
     padding-top: 140px;
     padding-bottom: 5rem;
-    min-height: 100vh;
 }
 
-/* HEADER & FILTER CONTROLS */
+/* =========================
+   HEADER & FILTER CONTROLS
+========================= */
+
 .projects-header {
     display: flex;
     justify-content: space-between;
@@ -19,12 +27,14 @@ html {
     margin-bottom: 3rem;
     padding-bottom: 1.5rem;
     border-bottom: 2px solid #232326;
+    min-width: 0;
 }
 
 .subtitle {
     margin: 0;
     font-size: 1rem;
     color: #94A3B8;
+    line-height: 1.6;
 }
 
 .controls-wrapper {
@@ -32,6 +42,7 @@ html {
     flex-direction: column;
     align-items: flex-end;
     gap: 1rem;
+    min-width: 0;
 }
 
 .search-input {
@@ -43,6 +54,8 @@ html {
     font-family: "JetBrains Mono", monospace;
     font-size: 0.9rem;
     width: 280px;
+    max-width: 100%;
+    min-height: 44px;
     transition: border-color 0.2s ease;
 }
 
@@ -55,6 +68,7 @@ html {
     display: flex;
     gap: 0.6rem;
     flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .filter-btn {
@@ -62,6 +76,7 @@ html {
     color: #94A3B8;
     border: 1px solid #2d2d30;
     padding: 0.55rem 1.1rem;
+    min-height: 44px;
     border-radius: 4px;
     font-family: "JetBrains Mono", monospace;
     font-size: 0.85rem;
@@ -81,7 +96,10 @@ html {
     font-weight: 700;
 }
 
-/* STATUS MESSAGE */
+/* =========================
+   STATUS MESSAGE
+========================= */
+
 .status-msg {
     text-align: center;
     padding: 2rem;
@@ -90,14 +108,25 @@ html {
     display: none;
 }
 
-/* PROJECTS GRID */
+/* =========================
+   PROJECTS GRID
+========================= */
+
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 360px), 1fr)
+    );
     gap: 2.5rem;
+    width: 100%;
+    min-width: 0;
 }
 
-/* PROJECT CARD */
+/* =========================
+   PROJECT CARD
+========================= */
+
 .project-card {
     background-color: #121213;
     border: 1px solid #232326;
@@ -105,6 +134,7 @@ html {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    min-width: 0;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
@@ -133,7 +163,10 @@ html {
     transform: scale(1.05);
 }
 
-/* STATUS BADGES */
+/* =========================
+   STATUS BADGES
+========================= */
+
 .status-badge {
     display: inline-block;
     padding: 0.3rem 0.75rem;
@@ -167,12 +200,16 @@ html {
     border-color: #4ADE80;
 }
 
-/* CARD BODY */
+/* =========================
+   CARD BODY
+========================= */
+
 .card-body {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    min-width: 0;
 }
 
 .card-date {
@@ -185,6 +222,8 @@ html {
     color: #DC2626;
     font-family: "Audiowide", sans-serif;
     font-size: 1.25rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
     margin: 0 0 0.75rem 0;
 }
 
@@ -194,9 +233,13 @@ html {
     line-height: 1.65;
     margin: 0 0 1.25rem 0;
     flex-grow: 1;
+    overflow-wrap: anywhere;
 }
 
-/* TAGS */
+/* =========================
+   TAGS
+========================= */
+
 .card-tags {
     display: flex;
     flex-wrap: wrap;
@@ -211,16 +254,23 @@ html {
     padding: 0.3rem 0.65rem;
     border-radius: 4px;
     border: 1px solid #2d2d30;
+    overflow-wrap: anywhere;
 }
 
-/* CARD BUTTONS */
+/* =========================
+   CARD BUTTONS
+========================= */
+
 .card-actions {
     display: flex;
     gap: 0.75rem;
+    flex-wrap: wrap;
 }
 
 .card-btn {
     flex: 1;
+    min-width: 0;
+    min-height: 44px;
     padding: 0.75rem 1rem;
     background-color: transparent;
     color: #DC2626;
@@ -240,7 +290,10 @@ html {
     color: #161617;
 }
 
-/* MODAL POPUP */
+/* =========================
+   MODAL POPUP
+========================= */
+
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -250,6 +303,7 @@ html {
     align-items: center;
     padding: 1.5rem;
     z-index: 200;
+    overflow-y: auto;
 }
 
 .modal-overlay.open {
@@ -263,7 +317,9 @@ html {
     max-width: 680px;
     width: 100%;
     max-height: 90vh;
+    max-height: 90dvh;
     overflow-y: auto;
+    overscroll-behavior: contain;
     position: relative;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
 }
@@ -275,12 +331,13 @@ html {
     background: rgba(22, 22, 23, 0.9);
     color: #E2E8F0;
     border: 1px solid #2d2d30;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     font-size: 1.4rem;
     cursor: pointer;
     line-height: 1;
+    z-index: 2;
 }
 
 .modal-close:hover {
@@ -297,12 +354,15 @@ html {
 
 .modal-content {
     padding: 2rem;
+    min-width: 0;
 }
 
 .modal-title {
     color: #DC2626;
     font-family: "Audiowide", sans-serif;
     font-size: 1.6rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
     margin: 0.75rem 0 0.4rem 0;
 }
 
@@ -316,6 +376,7 @@ html {
     color: #CBD5E1;
     font-size: 0.95rem;
     line-height: 1.75;
+    overflow-wrap: anywhere;
     margin: 0 0 1.5rem 0;
 }
 
@@ -323,10 +384,46 @@ html {
     margin-top: 0.5rem;
 }
 
-/* RESPONSIVE */
+/* =========================
+   TABLET RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .projects-grid {
+        gap: 1.75rem;
+    }
+
+    .projects-header {
+        gap: 1.5rem;
+    }
+
+    .controls-wrapper {
+        align-items: flex-start;
+    }
+
+    .filter-bar {
+        justify-content: flex-start;
+    }
+
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
 @media (max-width: 768px) {
+
     .projects-page {
         padding-top: 110px;
+        padding-bottom: 3rem;
+    }
+
+    .projects-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
     }
 
     .controls-wrapper {
@@ -336,14 +433,123 @@ html {
 
     .search-input {
         width: 100%;
-        box-sizing: border-box;
+    }
+
+    .filter-bar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.6rem;
+        width: 100%;
+    }
+
+    .filter-btn {
+        padding: 0.7rem 0.4rem;
+        font-size: 0.75rem;
     }
 
     .projects-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.75rem;
+    }
+
+    .card-image-wrapper {
+        height: 200px;
+    }
+
+    .card-body {
+        padding: 1.25rem;
+    }
+
+    .modal-overlay {
+        padding: 0.75rem;
+        align-items: center;
+    }
+
+    .modal-box {
+        max-height: 90vh;
+        max-height: 90dvh;
     }
 
     .modal-image {
         height: 200px;
     }
+
+    .modal-content {
+        padding: 1.25rem;
+    }
+
+    .modal-title {
+        font-size: 1.2rem;
+    }
+
+    .modal-desc {
+        font-size: 0.88rem;
+    }
+
+    .modal-actions .cta-btn {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+}
+
+/* =========================
+   SMALL PHONE SUPPORT
+========================= */
+
+@media (max-width: 480px) {
+
+    .projects-page {
+        padding-top: 100px;
+    }
+
+    .subtitle {
+        font-size: 0.85rem;
+    }
+
+    .filter-btn {
+        font-size: 0.7rem;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .card-desc {
+        font-size: 0.82rem;
+    }
+
+    .card-actions {
+        flex-direction: column;
+    }
+
+    .card-btn {
+        width: 100%;
+    }
+
+    .modal-image {
+        height: 170px;
+    }
+
+    .modal-content {
+        padding: 1rem;
+    }
+
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .project-card,
+    .card-image-wrapper img,
+    .filter-btn,
+    .card-btn {
+        transition: none;
+    }
+
 }
