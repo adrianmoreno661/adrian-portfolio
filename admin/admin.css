@@ -1,29 +1,45 @@
-
 /* =========================================
-   AM MOTORSPORT
-   ENGINEERING OPERATIONS SYSTEM
+   AM MOTORSPORT // SPEC-034 BRUTALIST HUD
+   FUSED: INDUSTRIAL DECAL + ACID TELEMETRY
 ========================================= */
 
 :root {
-    --background: #090c0f;
-    --surface: #11161b;
-    --surface-raised: #171e24;
-    --surface-hover: #202830;
+    --background: #070708;
+    --surface: #0d0e11;
+    --surface-raised: #14161b;
+    --surface-hover: #1b1e24;
 
-    --border: #28333b;
-    --border-light: #3a4650;
+    --border: #23262e;
+    --border-light: #383d4a;
 
-    --text: #e8edf0;
-    --muted: #929da6;
-    --subtle: #606c75;
+    --text: #f4f4f0;          /* Bone White */
+    --muted: #989ca6;
+    --subtle: #5c616e;
 
-    --teal: #50c8bd;
-    --teal-dark: #247d78;
-    --orange: #ff914d;
-    --orange-dark: #bd6032;
+    /* Core Signature Accents */
+    --teal: #ff2e3b;          /* Infrared Crimson (replaces teal slots) */
+    --teal-dark: #991720;
+    --orange: #f7c600;        /* Hazard Racing Yellow (replaces orange slots) */
+    --orange-dark: #a68500;
 
-    --green: #65d49b;
-    --red: #e46b70;
+    --green: #00e676;
+    --red: #ff2e3b;
+
+    --hazard-stripe: repeating-linear-gradient(
+        -45deg,
+        #f7c600,
+        #f7c600 6px,
+        #070708 6px,
+        #070708 12px
+    );
+
+    --hazard-subtle: repeating-linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.08) 4px,
+        transparent 4px,
+        transparent 8px
+    );
 
     --font-main: "JetBrains Mono", monospace;
     --font-display: "Audiowide", sans-serif;
@@ -36,17 +52,32 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 35px;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
     margin: 0;
     min-height: 100vh;
-    background:
-        radial-gradient(ellipse at 75% 0%, #152129 0%, transparent 40%),
-        var(--background);
+    background-color: var(--background);
+    background-image:
+        radial-gradient(circle at 80% 10%, rgba(255, 46, 59, 0.09) 0%, transparent 42%),
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: auto, 48px 48px, 48px 48px;
     color: var(--text);
     font-family: var(--font-main);
     overflow-x: hidden;
+}
+
+/* Fine Analog Film Grain Texture */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 [hidden] {
@@ -77,8 +108,8 @@ button {
 }
 
 ::selection {
-    color: #071011;
-    background: var(--teal);
+    color: #070708;
+    background: var(--orange);
 }
 
 
@@ -88,43 +119,50 @@ button {
 
 .eyebrow {
     margin: 0;
-    color: var(--teal);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    line-height: 1.9;
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.2px;
+    line-height: 1.7;
+    text-transform: uppercase;
 }
 
 .section-description {
     color: var(--muted);
-    font-size: 11px;
-    line-height: 1.9;
+    font-size: 12px;
+    line-height: 1.75;
 }
 
 .admin-logo {
-    color: #f1f4f5;
+    color: var(--text);
     font-family: var(--font-display);
     font-size: 30px;
     letter-spacing: -2px;
 }
 
 .admin-logo span {
-    color: var(--orange);
+    color: var(--teal);
 }
 
 .system-indicator {
-    width: 7px;
-    height: 7px;
-    flex: 0 0 7px;
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
     display: inline-block;
-    background: var(--green);
+    background: var(--teal);
     border-radius: 50%;
-    box-shadow: 0 0 10px #65d49b66;
+    box-shadow: 0 0 12px var(--teal);
+    animation: beacon-blink 1.8s infinite ease-in-out;
+}
+
+@keyframes beacon-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
 }
 
 input::placeholder,
 textarea::placeholder {
-    color: #58636c;
+    color: #4c515c;
 }
 
 
@@ -135,57 +173,58 @@ textarea::placeholder {
 .login-screen {
     position: relative;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 35px 20px;
+    padding: 32px 20px;
     overflow: hidden;
-
     background:
-        linear-gradient(#ffffff04 1px, transparent 1px),
-        linear-gradient(90deg, #ffffff04 1px, transparent 1px),
-        radial-gradient(ellipse at 50% 45%, #1c2c32 0%, transparent 65%),
-        #090c0f;
-
-    background-size:
-        45px 45px,
-        45px 45px,
-        auto,
-        auto;
+        radial-gradient(circle at 50% 45%, rgba(255, 46, 59, 0.12) 0%, transparent 60%),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        #070708;
+    background-size: auto, 36px 36px, 36px 36px, auto;
 }
 
 .login-panel {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 455px;
-    padding: 38px;
-    background: #11171c;
-    border: 1px solid var(--border);
-    box-shadow: 0 25px 90px #00000066;
+    max-width: 460px;
+    padding: 40px 36px 34px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    box-shadow: 0 30px 90px #000000e6;
 }
 
+/* Industrial Hazard Bar Across Top */
 .login-panel::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 3px;
-    background: linear-gradient(
-        90deg,
-        var(--teal) 0%,
-        var(--teal) 55%,
-        var(--orange) 55%,
-        var(--orange) 100%
-    );
+    height: 6px;
+    background: var(--hazard-stripe);
+}
+
+/* Viewfinder Corner Registration Marks */
+.login-panel::after {
+    content: "SPEC // 034-AUTH";
+    position: absolute;
+    bottom: -22px;
+    right: 0;
+    color: var(--subtle);
+    font-size: 9px;
+    letter-spacing: 2px;
 }
 
 .login-topline {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 26px;
 }
 
 .login-panel .admin-logo {
@@ -193,42 +232,48 @@ textarea::placeholder {
 }
 
 .login-system-label {
-    color: var(--muted);
+    padding: 4px 8px;
+    color: #070708;
+    background: var(--orange);
     font-size: 9px;
+    font-weight: 800;
     letter-spacing: 1.5px;
 }
 
 .login-accent {
     width: 100%;
-    height: 1px;
-    margin-bottom: 30px;
-    background: var(--border);
+    height: 6px;
+    margin-bottom: 26px;
+    background: var(--hazard-subtle);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 .login-panel h1 {
     margin: 12px 0;
-    color: #f4f6f7;
+    color: var(--text);
     font-family: var(--font-display);
     font-size: 26px;
     font-weight: 400;
+    letter-spacing: -0.5px;
 }
 
 .login-panel h1 span {
-    color: var(--orange);
+    color: var(--teal);
 }
 
 .login-panel .section-description {
-    margin-bottom: 30px;
+    margin-bottom: 26px;
 }
 
 .login-panel label,
 .management-panel label {
     display: block;
-    margin: 20px 0 9px;
-    color: #aab5bd;
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 1.4px;
+    margin: 20px 0 8px;
+    color: var(--text);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
 }
 
 .login-panel input,
@@ -238,52 +283,61 @@ textarea::placeholder {
     display: block;
     width: 100%;
     min-width: 0;
-    padding: 14px 15px;
+    min-height: 46px;
+    padding: 13px 15px;
     color: var(--text);
-    background: #090e12;
-    border: 1px solid var(--border);
-    border-radius: 2px;
+    background: #070708;
+    border: 1px solid var(--border-light);
+    border-radius: 0;
     outline: none;
     font-family: var(--font-main);
-    font-size: 11px;
-    transition: border-color 0.2s ease, background 0.2s ease;
+    font-size: 13px;
+    transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
 .login-panel input:focus,
 .management-panel input:focus,
 .management-panel select:focus,
 .management-panel textarea:focus {
-    background: #101a20;
-    border-color: var(--teal);
+    background: #101116;
+    border-color: var(--orange);
+    box-shadow: inset 3px 0 0 var(--orange);
 }
 
+/* Stark Bone-White Brutalist CTA Button (EX8 Reference) */
 .login-panel button {
     width: 100%;
-    min-height: 49px;
-    margin-top: 25px;
-    padding: 13px 16px;
+    min-height: 52px;
+    margin-top: 26px;
+    padding: 14px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #071011;
-    background: var(--teal);
-    border: 1px solid var(--teal);
+    color: #070708;
+    background: var(--text);
+    border: 1px solid var(--text);
+    border-radius: 0;
     cursor: pointer;
-    font-size: 11px;
-    font-weight: 700;
-    transition: 0.2s ease;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    transition: 0.15s ease;
 }
 
 .login-panel button:hover {
-    background: #76ded4;
-    border-color: #76ded4;
+    color: #070708;
+    background: var(--orange);
+    border-color: var(--orange);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--teal);
 }
 
 #login-error {
     min-height: 18px;
     margin-top: 14px;
-    color: #ff888b;
-    font-size: 10px;
+    color: var(--teal);
+    font-size: 11px;
+    font-weight: 600;
     line-height: 1.6;
 }
 
@@ -292,11 +346,11 @@ textarea::placeholder {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 30px;
-    padding-top: 18px;
+    margin-top: 28px;
+    padding-top: 16px;
     border-top: 1px solid var(--border);
     color: var(--subtle);
-    font-size: 8px;
+    font-size: 9px;
     letter-spacing: 1px;
     line-height: 1.7;
 }
@@ -304,8 +358,8 @@ textarea::placeholder {
 .login-background-mark {
     position: absolute;
     right: -30px;
-    bottom: -120px;
-    color: #ffffff05;
+    bottom: -110px;
+    color: rgba(255, 255, 255, 0.025);
     font-family: var(--font-display);
     font-size: clamp(220px, 35vw, 500px);
     pointer-events: none;
@@ -319,17 +373,16 @@ textarea::placeholder {
 
 .sidebar {
     position: fixed;
-    z-index: 20;
+    z-index: 30;
     top: 0;
     left: 0;
-    width: 260px;
+    width: 265px;
     height: 100vh;
     min-height: 100vh;
     padding: 28px 21px;
     display: flex;
     flex-direction: column;
-    background:
-        linear-gradient(145deg, #111920 0%, #0b1014 65%);
+    background: #0a0b0e;
     border-right: 1px solid var(--border);
 }
 
@@ -347,16 +400,16 @@ textarea::placeholder {
 .brand-caption {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
     color: var(--muted);
-    font-size: 8px;
+    font-size: 9px;
     letter-spacing: 1.4px;
     line-height: 1.4;
 }
 
 .brand-caption strong {
-    color: #f0f3f4;
-    font-size: 10px;
+    color: var(--text);
+    font-size: 11px;
     letter-spacing: 1.7px;
 }
 
@@ -364,13 +417,13 @@ textarea::placeholder {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 23px;
-    padding: 10px 9px;
-    color: var(--subtle);
-    background: #ffffff04;
-    border: 1px solid var(--border);
-    font-size: 7px;
-    letter-spacing: 1px;
+    margin-top: 22px;
+    padding: 9px 10px;
+    color: #070708;
+    background: var(--orange);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
     white-space: nowrap;
 }
 
@@ -378,20 +431,23 @@ textarea::placeholder {
     width: 6px;
     height: 6px;
     flex: 0 0 6px;
-    background: var(--orange);
-    border-radius: 50%;
+    background: #070708;
+    border-radius: 0;
 }
 
 .sidebar-divider {
-    height: 1px;
-    margin: 27px 0;
-    background: var(--border);
+    height: 6px;
+    margin: 22px 0;
+    background: var(--hazard-subtle);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 .sidebar-label {
-    margin: 0 0 14px 9px;
+    margin: 0 0 12px 4px;
     color: var(--subtle);
     font-size: 9px;
+    font-weight: 700;
     letter-spacing: 2px;
 }
 
@@ -403,51 +459,53 @@ textarea::placeholder {
 
 .sidebar-nav a {
     position: relative;
-    min-height: 47px;
-    padding: 0 11px;
+    min-height: 46px;
+    padding: 0 12px;
     display: flex;
     align-items: center;
     gap: 12px;
     color: var(--muted);
     border: 1px solid transparent;
     text-decoration: none;
-    font-size: 9px;
-    transition: 0.2s ease;
+    font-size: 11px;
+    font-weight: 600;
+    transition: 0.15s ease;
 }
 
 .sidebar-nav a:hover {
-    color: white;
-    background: #ffffff06;
+    color: var(--text);
+    background: var(--surface-raised);
     border-color: var(--border);
 }
 
 .sidebar-nav a.active {
-    color: #f1f4f5;
-    background: linear-gradient(90deg, #50c8bd16, #ffffff03);
-    border-color: #50c8bd35;
+    color: var(--text);
+    background: var(--surface-raised);
+    border-color: var(--border-light);
 }
 
 .sidebar-nav a.active::before {
     content: "";
     position: absolute;
-    top: 10px;
-    bottom: 10px;
+    top: -1px;
+    bottom: -1px;
     left: -1px;
-    width: 3px;
+    width: 4px;
     background: var(--teal);
 }
 
 .nav-index {
-    color: var(--teal);
-    font-size: 9px;
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: 800;
 }
 
 .nav-indicator {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     margin-left: auto;
     background: var(--teal);
-    border-radius: 50%;
+    border-radius: 0;
     opacity: 0;
 }
 
@@ -457,24 +515,24 @@ textarea::placeholder {
 
 .sidebar-spacer {
     flex: 1;
-    min-height: 35px;
+    min-height: 30px;
 }
 
 .sidebar-division {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     color: var(--subtle);
-    font-size: 7px;
+    font-size: 8px;
     letter-spacing: 1px;
     line-height: 1.7;
 }
 
 .division-line {
     width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, var(--teal-dark), transparent);
+    height: 4px;
+    background: var(--hazard-subtle);
 }
 
 .sidebar-bottom {
@@ -486,47 +544,58 @@ textarea::placeholder {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 9px 19px;
+    padding: 8px 6px 16px;
 }
 
 .sidebar-system div {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
 }
 
 .sidebar-system strong {
-    color: #dce5e8;
-    font-size: 8px;
+    color: var(--text);
+    font-size: 9px;
     letter-spacing: 1px;
 }
 
 .sidebar-system small {
     color: var(--subtle);
-    font-size: 7px;
+    font-size: 8px;
     letter-spacing: 1px;
 }
 
 .portfolio-link {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
-    padding: 13px 10px;
-    color: var(--muted);
-    border: 1px solid var(--border);
+    min-height: 44px;
+    padding: 11px 13px;
+    color: #070708;
+    background: var(--text);
+    border: 1px solid var(--text);
     text-decoration: none;
-    font-size: 9px;
-    transition: 0.2s ease;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    transition: 0.15s ease;
 }
 
 .portfolio-link span {
-    color: var(--orange);
+    color: var(--teal);
+    font-weight: 900;
 }
 
 .portfolio-link:hover {
-    color: white;
-    border-color: var(--teal-dark);
-    background: #50c8bd08;
+    background: var(--orange);
+    border-color: var(--orange);
+    transform: translate(-2px, -2px);
+    box-shadow: 3px 3px 0 var(--teal);
+}
+
+.portfolio-link:hover span {
+    color: #070708;
 }
 
 
@@ -535,11 +604,11 @@ textarea::placeholder {
 ========================================= */
 
 .main-content {
-    width: calc(100% - 260px);
+    width: calc(100% - 265px);
     max-width: 1900px;
     min-width: 0;
-    margin-left: 260px;
-    padding: 35px clamp(25px, 4vw, 68px) 35px;
+    margin-left: 265px;
+    padding: 35px clamp(25px, 4vw, 68px) 45px;
 }
 
 .topbar {
@@ -557,17 +626,17 @@ textarea::placeholder {
     align-items: center;
     gap: 10px;
     color: var(--subtle);
-    font-size: 8px;
+    font-size: 9px;
     letter-spacing: 1.5px;
 }
 
 .breadcrumb-divider {
-    color: var(--orange);
+    color: var(--teal);
 }
 
 .topbar h1 {
     margin: 10px 0 0;
-    color: #f1f4f5;
+    color: var(--text);
     font-family: var(--font-display);
     font-size: clamp(22px, 2.5vw, 30px);
     font-weight: 400;
@@ -587,38 +656,49 @@ textarea::placeholder {
     display: flex;
     align-items: center;
     gap: 9px;
-    padding: 10px 12px;
-    color: #d4dfe1;
-    border: 1px solid var(--border);
-    font-size: 8px;
+    min-height: 40px;
+    padding: 10px 13px;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    font-size: 9px;
+    font-weight: 700;
     letter-spacing: 1.3px;
     white-space: nowrap;
 }
 
 .logout-button {
-    min-height: 39px;
-    padding: 9px 13px;
-    color: var(--muted);
-    background: transparent;
-    border: 1px solid var(--border);
+    min-height: 40px;
+    padding: 9px 14px;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: 0;
     cursor: pointer;
-    font-size: 9px;
-    transition: 0.2s ease;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    transition: 0.15s ease;
 }
 
 .logout-button span {
     margin-left: 8px;
-    color: var(--orange);
+    color: var(--teal);
 }
 
 .logout-button:hover {
     color: white;
-    border-color: var(--orange-dark);
+    border-color: var(--teal);
+    background: var(--teal);
+}
+
+.logout-button:hover span {
+    color: white;
 }
 
 
 /* =========================================
-   OPERATIONS BANNER
+   OPERATIONS BANNER (OUTER + GROMGEAR HERO)
 ========================================= */
 
 .dashboard-section {
@@ -627,58 +707,50 @@ textarea::placeholder {
 
 .operations-banner {
     position: relative;
-    min-height: 260px;
-    padding: 35px 38px 55px;
+    min-height: 270px;
+    padding: 40px 38px 58px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 25px;
     overflow: hidden;
-
     background:
-        linear-gradient(100deg, #151f25 0%, #10171c 55%, #14252a 100%);
-    border: 1px solid var(--border);
+        radial-gradient(circle at 88% 50%, rgba(255, 46, 59, 0.18) 0%, transparent 52%),
+        linear-gradient(125deg, #111318 0%, #090a0d 65%);
+    border: 1px solid var(--border-light);
 }
 
+/* Top Hazard Stripe Ribbon */
 .operations-banner::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-
-    background:
-        linear-gradient(#ffffff06 1px, transparent 1px),
-        linear-gradient(90deg, #ffffff06 1px, transparent 1px);
-
-    background-size: 34px 34px;
-
-    mask-image: linear-gradient(90deg, black, transparent 90%);
-}
-
-.operations-banner::after {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(
-        180deg,
-        var(--teal) 0%,
-        var(--teal) 65%,
-        var(--orange) 65%,
-        var(--orange) 100%
-    );
+    right: 0;
+    height: 6px;
+    background: var(--hazard-stripe);
+}
+
+/* Left Crimson Stamp Bar */
+.operations-banner::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 5px;
+    height: calc(100% - 6px);
+    background: var(--teal);
 }
 
 .operations-copy {
     position: relative;
     z-index: 2;
-    max-width: 470px;
+    max-width: 510px;
 }
 
 .operations-copy .eyebrow {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
+    color: var(--teal);
 }
 
 .eyebrow-divider {
@@ -688,54 +760,56 @@ textarea::placeholder {
 
 .operations-copy h2 {
     margin: 0;
-    color: #f2f5f5;
+    color: var(--text);
     font-family: var(--font-display);
-    font-size: clamp(28px, 4vw, 43px);
+    font-size: clamp(28px, 4vw, 44px);
     font-weight: 400;
-    line-height: 1.35;
+    line-height: 1.25;
     letter-spacing: -1px;
 }
 
 .operations-copy h2 span {
-    color: var(--teal);
+    color: var(--orange);
 }
 
 .operations-copy .section-description {
-    max-width: 390px;
+    max-width: 420px;
     margin-top: 15px;
 }
 
 
 /* =========================================
-   OPERATIONS GRAPHIC
+   OPERATIONS GRAPHIC (CRIMSON WIREFRAME GLOBE)
 ========================================= */
 
 .operations-graphic {
     position: relative;
-    width: 205px;
-    height: 190px;
-    flex: 0 0 205px;
+    width: 210px;
+    height: 195px;
+    flex: 0 0 210px;
     display: grid;
     place-items: center;
 }
 
 .graphic-ring {
     position: absolute;
-    border: 1px solid #50c8bd30;
+    border: 1px solid rgba(255, 46, 59, 0.45);
     border-radius: 50%;
 }
 
 .graphic-ring-one {
-    width: 165px;
-    height: 165px;
+    width: 170px;
+    height: 170px;
+    box-shadow: inset 0 0 30px rgba(255, 46, 59, 0.14);
 }
 
 .graphic-ring-two {
-    width: 125px;
-    height: 125px;
+    width: 126px;
+    height: 126px;
+    border-width: 2px;
     border-style: dashed;
-    border-color: #ff914d45;
-    animation: ring-rotate 35s linear infinite;
+    border-color: var(--orange);
+    animation: ring-rotate 25s linear infinite;
 }
 
 .graphic-core {
@@ -743,10 +817,10 @@ textarea::placeholder {
     height: 84px;
     display: grid;
     place-items: center;
-    color: white;
-    background: linear-gradient(145deg, #26383e, #111a20);
-    border: 1px solid #50c8bd70;
-    box-shadow: 0 0 35px #50c8bd12;
+    color: var(--text);
+    background: #070708;
+    border: 1px solid var(--teal);
+    box-shadow: 0 0 25px rgba(255, 46, 59, 0.25);
     font-family: var(--font-display);
     font-size: 23px;
     letter-spacing: -2px;
@@ -758,8 +832,9 @@ textarea::placeholder {
 
 .graphic-coordinate {
     position: absolute;
-    color: var(--subtle);
-    font-size: 7px;
+    color: var(--muted);
+    font-size: 8px;
+    font-weight: 700;
     letter-spacing: 1px;
 }
 
@@ -775,9 +850,9 @@ textarea::placeholder {
 
 .graphic-crosshair {
     position: absolute;
-    width: 190px;
+    width: 205px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #50c8bd40, transparent);
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
 }
 
 .banner-footer {
@@ -785,30 +860,25 @@ textarea::placeholder {
     right: 20px;
     bottom: 0;
     left: 20px;
-    min-height: 34px;
+    min-height: 36px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    border-top: 1px solid #ffffff12;
+    border-top: 1px solid var(--border);
     color: var(--subtle);
-    font-size: 7px;
+    font-size: 8px;
     letter-spacing: 1.2px;
 }
 
 @keyframes ring-rotate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 
 /* =========================================
-   DEPARTMENT DIRECTORY
+   DEPARTMENT DIRECTORY (ESPORTS STAT CARDS)
 ========================================= */
 
 .overview-heading {
@@ -825,54 +895,73 @@ textarea::placeholder {
 
 .overview-heading h2 {
     margin: 0;
-    color: #e8edef;
-    font-size: 15px;
-    font-weight: 600;
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 700;
 }
 
 .overview-reference {
     color: var(--subtle);
-    font-size: 8px;
+    font-size: 9px;
     letter-spacing: 1px;
 }
 
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 13px;
+    gap: 14px;
 }
 
 .dashboard-card {
     position: relative;
     min-height: 205px;
-    padding: 20px;
+    padding: 22px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 15px;
     overflow: hidden;
-    background: linear-gradient(145deg, #151c21, #101519);
+    background: var(--surface);
     border: 1px solid var(--border);
     text-decoration: none;
-    transition: 0.2s ease;
+    transition: 0.15s ease;
+}
+
+/* Registration Bracket Corner Accent */
+.dashboard-card::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid var(--border-light);
+    border-right: 2px solid var(--border-light);
+    transition: 0.15s ease;
 }
 
 .dashboard-card::after {
     content: "";
     position: absolute;
-    right: -30px;
-    bottom: -65px;
-    width: 135px;
-    height: 135px;
-    border: 1px solid #ffffff08;
-    transform: rotate(45deg);
-    pointer-events: none;
+    bottom: 8px;
+    left: 8px;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid var(--border-light);
+    border-left: 2px solid var(--border-light);
+    transition: 0.15s ease;
 }
 
 .dashboard-card:hover {
-    background: linear-gradient(145deg, #1b282d, #12191d);
-    border-color: var(--teal-dark);
-    transform: translateY(-3px);
+    background: var(--surface-raised);
+    border-color: var(--orange);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--teal);
+}
+
+.dashboard-card:hover::before,
+.dashboard-card:hover::after {
+    border-color: var(--orange);
 }
 
 .dashboard-card-top {
@@ -882,23 +971,27 @@ textarea::placeholder {
 }
 
 .card-index {
-    color: var(--subtle);
-    font-size: 8px;
-    letter-spacing: 1.3px;
+    padding: 3px 7px;
+    color: #070708;
+    background: var(--orange);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 
 .card-arrow {
-    color: var(--teal);
+    color: var(--text);
     font-size: 16px;
-    transition: transform 0.2s ease;
+    transition: transform 0.15s ease;
 }
 
 .dashboard-card:hover .card-arrow {
+    color: var(--orange);
     transform: translate(3px, -3px);
 }
 
 .card-icon {
-    color: #ffffff12;
+    color: rgba(255, 255, 255, 0.05);
     font-family: var(--font-display);
     font-size: 31px;
     line-height: 1;
@@ -906,17 +999,17 @@ textarea::placeholder {
 
 .dashboard-card h3 {
     margin: 0 0 9px;
-    color: #eef2f3;
-    font-size: 13px;
-    font-weight: 600;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 700;
 }
 
 .dashboard-card p {
     max-width: 390px;
     margin: 0;
     color: var(--muted);
-    font-size: 9px;
-    line-height: 1.9;
+    font-size: 11px;
+    line-height: 1.75;
 }
 
 .card-footer {
@@ -929,72 +1022,74 @@ textarea::placeholder {
     padding-top: 13px;
     border-top: 1px solid var(--border);
     color: var(--subtle);
-    font-size: 7px;
+    font-size: 8px;
     letter-spacing: 1px;
 }
 
 .card-footer span:last-child {
     color: var(--teal);
+    font-weight: 700;
     text-align: right;
 }
 
-.media-card .card-arrow,
-.media-card .card-footer span:last-child {
-    color: var(--orange);
-}
-
-.timeline-card .card-arrow,
-.timeline-card .card-footer span:last-child {
-    color: var(--orange);
+.media-card .card-index,
+.timeline-card .card-index {
+    color: var(--text);
+    background: var(--teal);
 }
 
 .dashboard-note {
     display: flex;
     align-items: center;
-    gap: 13px;
+    gap: 14px;
     margin-top: 16px;
-    padding: 15px 17px;
-    background: #111a1e;
-    border: 1px solid #50c8bd30;
+    padding: 16px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-left: 4px solid var(--orange);
 }
 
 .note-mark {
-    width: 24px;
-    height: 24px;
-    flex: 0 0 24px;
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
     display: grid;
     place-items: center;
-    color: var(--teal);
-    border: 1px solid #50c8bd55;
-    font-size: 11px;
+    color: #070708;
+    background: var(--orange);
+    font-size: 12px;
+    font-weight: 800;
 }
 
 .dashboard-note p {
     flex: 1;
     margin: 0;
     color: var(--muted);
-    font-size: 9px;
-    line-height: 1.8;
+    font-size: 11px;
+    line-height: 1.7;
 }
 
 .dashboard-note strong {
     display: block;
     margin-bottom: 3px;
-    color: #e2e9e9;
-    font-size: 8px;
+    color: var(--text);
+    font-size: 9px;
     letter-spacing: 1px;
 }
 
 .note-status {
+    padding: 4px 8px;
     color: var(--teal);
-    font-size: 7px;
+    border: 1px solid var(--teal);
+    font-size: 8px;
+    font-weight: 700;
     letter-spacing: 1px;
     white-space: nowrap;
 }
 
 
 /* =========================================
-   MANAGEMENT SECTIONS
+   MANAGEMENT SECTIONS (REMOVABLE MODULE STYLE)
 ========================================= */
 
 .management-section {
@@ -1016,15 +1111,15 @@ textarea::placeholder {
 
 .section-heading h2 {
     margin: 0;
-    color: #f0f3f4;
+    color: var(--text);
     font-family: var(--font-display);
     font-size: clamp(21px, 2.5vw, 28px);
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.45;
 }
 
 .section-heading h2 span {
-    color: var(--orange);
+    color: var(--teal);
 }
 
 .section-heading .section-description {
@@ -1041,51 +1136,52 @@ textarea::placeholder {
 
 .section-reference span:first-child {
     color: var(--subtle);
-    font-size: 7px;
+    font-size: 8px;
     letter-spacing: 1.5px;
 }
 
 .section-reference strong {
-    color: var(--muted);
-    font-size: 8px;
+    color: var(--orange);
+    font-size: 9px;
     letter-spacing: 0.5px;
     text-align: right;
 }
 
 .section-number {
     margin-top: 4px;
-    color: #34414a;
+    color: #252932;
     font-family: var(--font-display);
-    font-size: 32px;
+    font-size: 34px;
 }
 
 .management-layout {
     display: grid;
-    grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+    grid-template-columns: minmax(290px, 0.85fr) minmax(0, 1.15fr);
     align-items: start;
-    gap: 15px;
+    gap: 16px;
 }
 
 .management-panel {
     position: relative;
     min-width: 0;
-    padding: 23px;
-    background: linear-gradient(145deg, #151b20, #11161a);
-    border: 1px solid var(--border);
+    padding: 26px 24px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
 }
 
+/* Industrial Top Stripe */
 .management-panel::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
-    width: 40px;
-    height: 2px;
+    right: 0;
+    height: 4px;
     background: var(--teal);
 }
 
 .list-panel::before {
-    background: var(--orange);
+    background: var(--hazard-stripe);
 }
 
 .panel-heading {
@@ -1099,8 +1195,8 @@ textarea::placeholder {
 
 .panel-kicker {
     color: var(--teal);
-    font-size: 8px;
-    font-weight: 600;
+    font-size: 9px;
+    font-weight: 800;
     letter-spacing: 1.5px;
 }
 
@@ -1109,8 +1205,11 @@ textarea::placeholder {
 }
 
 .panel-code {
-    color: var(--subtle);
-    font-size: 8px;
+    padding: 2px 6px;
+    color: var(--text);
+    background: #1a1d24;
+    border: 1px solid var(--border-light);
+    font-size: 9px;
     letter-spacing: 1px;
 }
 
@@ -1122,9 +1221,9 @@ textarea::placeholder {
 }
 
 .panel-title-mark {
-    width: 3px;
-    height: 17px;
-    flex: 0 0 3px;
+    width: 8px;
+    height: 18px;
+    flex: 0 0 8px;
     background: var(--teal);
 }
 
@@ -1138,16 +1237,16 @@ textarea::placeholder {
 
 .management-panel h3 {
     margin: 0;
-    color: #edf1f2;
-    font-size: 13px;
-    font-weight: 600;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .panel-description {
-    margin: 12px 0 21px;
+    margin: 10px 0 21px;
     color: var(--muted);
-    font-size: 9px;
-    line-height: 1.9;
+    font-size: 11px;
+    line-height: 1.75;
 }
 
 .management-panel label {
@@ -1163,15 +1262,12 @@ textarea::placeholder {
 .management-panel select {
     appearance: none;
     cursor: pointer;
-
     background-image:
-        linear-gradient(45deg, transparent 50%, #9ba8ae 50%),
-        linear-gradient(135deg, #9ba8ae 50%, transparent 50%);
-
+        linear-gradient(45deg, transparent 50%, var(--orange) 50%),
+        linear-gradient(135deg, var(--orange) 50%, transparent 50%);
     background-position:
         calc(100% - 17px) 50%,
         calc(100% - 12px) 50%;
-
     background-size: 5px 5px;
     background-repeat: no-repeat;
     padding-right: 35px;
@@ -1179,46 +1275,51 @@ textarea::placeholder {
 
 .management-panel select option {
     color: var(--text);
-    background: #11171c;
+    background: #0d0e11;
 }
 
+/* Stark Off-White Brutalist Action Button */
 .primary-button {
     width: 100%;
-    min-height: 47px;
-    margin-top: 23px;
-    padding: 13px 15px;
+    min-height: 50px;
+    margin-top: 24px;
+    padding: 13px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
-    color: #071011;
-    background: var(--teal);
-    border: 1px solid var(--teal);
-    border-radius: 2px;
+    color: #070708;
+    background: var(--text);
+    border: 1px solid var(--text);
+    border-radius: 0;
     cursor: pointer;
-    font-size: 9px;
-    font-weight: 700;
-    transition: 0.2s ease;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    transition: 0.15s ease;
 }
 
 .primary-button:hover {
-    background: #78ded4;
-    border-color: #78ded4;
+    background: var(--orange);
+    border-color: var(--orange);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--teal);
 }
 
 .primary-button span:last-child {
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: 900;
 }
 
 .form-footnote {
     display: flex;
     justify-content: space-between;
     gap: 8px;
-    margin-top: 17px;
+    margin-top: 18px;
     padding-top: 13px;
     border-top: 1px solid var(--border);
     color: var(--subtle);
-    font-size: 7px;
+    font-size: 8px;
     letter-spacing: 0.8px;
 }
 
@@ -1231,51 +1332,49 @@ textarea::placeholder {
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    margin-bottom: 13px;
+    margin-bottom: 14px;
     padding: 10px 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     color: var(--subtle);
-    font-size: 7px;
+    font-size: 8px;
     letter-spacing: 1px;
 }
 
 .empty-message {
     margin: 0;
-    padding: 22px 0;
+    padding: 24px 0;
     color: var(--subtle);
-    font-size: 9px;
+    font-size: 11px;
     line-height: 1.8;
 }
 
-
 /* Existing JavaScript-generated entries */
-
 .project-entry,
 .skill-entry,
 .timeline-entry {
     position: relative;
     min-width: 0;
-    margin-bottom: 11px;
-    padding: 17px;
-    background: #0c1115;
-    border: 1px solid var(--border);
-    border-left: 2px solid var(--teal);
+    margin-bottom: 12px;
+    padding: 18px;
+    background: #090a0d;
+    border: 1px solid var(--border-light);
+    border-left: 4px solid var(--orange);
     overflow-wrap: anywhere;
-    transition: border-color 0.2s ease, background 0.2s ease;
+    transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .project-entry:hover,
 .skill-entry:hover,
 .timeline-entry:hover {
-    background: #11191e;
-    border-color: var(--border-light);
+    background: #111318;
+    border-color: var(--text);
 }
 
 .project-entry:nth-child(even),
 .skill-entry:nth-child(even),
 .timeline-entry:nth-child(even) {
-    border-left-color: var(--orange);
+    border-left-color: var(--teal);
 }
 
 .project-entry:last-child,
@@ -1287,58 +1386,61 @@ textarea::placeholder {
 .project-entry h4,
 .skill-entry h4,
 .timeline-entry h4 {
-    margin: 0 0 10px;
-    color: #edf1f2;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 1.7;
+    margin: 0 0 8px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.6;
 }
 
 .project-entry p,
 .skill-entry p,
 .timeline-entry p {
-    margin: 7px 0;
+    margin: 6px 0;
     color: var(--muted);
-    font-size: 9px;
-    line-height: 1.9;
+    font-size: 11px;
+    line-height: 1.75;
 }
 
 .project-entry button,
 .skill-entry button,
 .timeline-entry button {
-    min-height: 34px;
-    margin: 12px 7px 0 0;
-    padding: 8px 11px;
-    color: var(--muted);
-    background: #11181d;
+    min-height: 38px;
+    margin: 14px 8px 0 0;
+    padding: 8px 14px;
+    color: var(--text);
+    background: var(--surface-raised);
     border: 1px solid var(--border-light);
-    border-radius: 2px;
+    border-radius: 0;
     cursor: pointer;
     font-family: var(--font-main);
-    font-size: 8px;
-    transition: 0.2s ease;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    transition: 0.15s ease;
 }
 
 .project-entry button:hover,
 .skill-entry button:hover,
 .timeline-entry button:hover {
-    color: var(--teal);
-    border-color: var(--teal-dark);
+    color: #070708;
+    background: var(--orange);
+    border-color: var(--orange);
 }
 
 .project-entry button:last-child,
 .skill-entry button:last-child,
 .timeline-entry button:last-child {
-    color: #ed9292;
-    border-color: #704146;
+    color: var(--teal);
+    border-color: var(--teal-dark);
 }
 
 .project-entry button:last-child:hover,
 .skill-entry button:last-child:hover,
 .timeline-entry button:last-child:hover {
     color: white;
-    background: #8d3c43;
-    border-color: #8d3c43;
+    background: var(--teal);
+    border-color: var(--teal);
 }
 
 
@@ -1353,10 +1455,10 @@ textarea::placeholder {
     flex-wrap: wrap;
     gap: 13px;
     margin-top: 80px;
-    padding: 20px 0 10px;
+    padding: 22px 0 12px;
     border-top: 1px solid var(--border);
     color: var(--subtle);
-    font-size: 7px;
+    font-size: 9px;
     letter-spacing: 1.1px;
 }
 
@@ -1367,13 +1469,13 @@ textarea::placeholder {
 }
 
 .footer-brand strong {
-    color: #e9edef;
+    color: var(--text);
     font-family: var(--font-display);
     font-size: 15px;
 }
 
 .footer-brand strong span {
-    color: var(--orange);
+    color: var(--teal);
 }
 
 
@@ -1382,7 +1484,6 @@ textarea::placeholder {
 ========================================= */
 
 @media (max-width: 1100px) {
-
     .sidebar {
         width: 225px;
         padding-right: 17px;
@@ -1414,7 +1515,6 @@ textarea::placeholder {
         width: 110px;
         height: 110px;
     }
-
 }
 
 
@@ -1422,10 +1522,9 @@ textarea::placeholder {
    MOBILE
 ========================================= */
 
-@media (max-width: 700px) {
-
+@media (max-width: 768px) {
     html {
-        scroll-padding-top: 145px;
+        scroll-padding-top: 125px;
     }
 
     .sidebar {
@@ -1434,10 +1533,12 @@ textarea::placeholder {
         width: 100%;
         height: auto;
         min-height: 0;
-        padding: 11px 15px 9px;
+        padding: 12px 16px 10px;
         border-right: none;
-        border-bottom: 1px solid var(--border);
-        background: #0d1317;
+        border-bottom: 1px solid var(--border-light);
+        background: rgba(7, 7, 8, 0.94);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
     }
 
     .sidebar-brand {
@@ -1445,38 +1546,50 @@ textarea::placeholder {
     }
 
     .sidebar-brand .admin-logo {
-        font-size: 25px;
+        font-size: 24px;
     }
 
     .brand-caption {
-        gap: 3px;
-        font-size: 7px;
+        gap: 2px;
+        font-size: 8px;
     }
 
     .brand-caption strong {
-        font-size: 9px;
+        font-size: 10px;
     }
 
-    .team-classification {
-        display: none;
-    }
-
+    .team-classification,
     .sidebar-divider,
     .sidebar-label,
     .sidebar-spacer,
     .sidebar-division,
-    .sidebar-bottom {
+    .sidebar-system {
         display: none;
+    }
+
+    .sidebar-bottom {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        padding: 0;
+        border: none;
+    }
+
+    .portfolio-link {
+        min-height: 36px;
+        padding: 6px 10px;
+        font-size: 9px;
     }
 
     .sidebar-nav {
         display: flex;
         flex-direction: row;
-        gap: 5px;
-        margin-top: 11px;
+        gap: 6px;
+        margin-top: 12px;
         padding-bottom: 2px;
         overflow-x: auto;
         scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
     }
 
     .sidebar-nav::-webkit-scrollbar {
@@ -1484,18 +1597,23 @@ textarea::placeholder {
     }
 
     .sidebar-nav a {
-        min-height: 37px;
+        min-height: 40px;
         flex: 0 0 auto;
         gap: 7px;
-        padding: 0 10px;
-        font-size: 8px;
+        padding: 0 12px;
+        background: var(--surface);
+        border-color: var(--border);
+        font-size: 10px;
         white-space: nowrap;
     }
 
     .sidebar-nav a.active::before {
-        top: 9px;
-        bottom: 9px;
-        width: 2px;
+        top: auto;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        width: auto;
+        height: 3px;
     }
 
     .sidebar-nav a.active .nav-indicator {
@@ -1503,19 +1621,19 @@ textarea::placeholder {
     }
 
     .nav-index {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .main-content {
         width: 100%;
         margin: 0;
-        padding: 20px 16px 25px;
+        padding: 20px 16px 32px;
     }
 
     .topbar {
         align-items: flex-start;
         flex-direction: column;
-        gap: 15px;
+        gap: 14px;
         padding-bottom: 18px;
     }
 
@@ -1524,7 +1642,7 @@ textarea::placeholder {
     }
 
     .breadcrumb {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .topbar-actions {
@@ -1533,12 +1651,15 @@ textarea::placeholder {
     }
 
     .admin-status {
-        padding: 9px 10px;
-        font-size: 8px;
+        min-height: 40px;
+        padding: 8px 11px;
+        font-size: 9px;
     }
 
     .logout-button {
-        min-height: 38px;
+        min-height: 40px;
+        padding: 8px 13px;
+        font-size: 10px;
     }
 
     .dashboard-section {
@@ -1546,8 +1667,8 @@ textarea::placeholder {
     }
 
     .operations-banner {
-        min-height: 230px;
-        padding: 27px 23px 48px;
+        min-height: 220px;
+        padding: 30px 22px 48px;
     }
 
     .operations-copy {
@@ -1555,26 +1676,26 @@ textarea::placeholder {
     }
 
     .operations-copy .eyebrow {
-        font-size: 7px;
+        font-size: 9px;
         letter-spacing: 1.3px;
     }
 
     .operations-copy h2 {
-        font-size: clamp(26px, 7vw, 34px);
+        font-size: clamp(24px, 7vw, 32px);
     }
 
     .operations-copy .section-description {
-        max-width: 330px;
-        font-size: 9px;
+        max-width: 100%;
+        font-size: 11px;
     }
 
     .operations-graphic {
         position: absolute;
         right: -35px;
-        top: 30px;
+        top: 25px;
         width: 145px;
         height: 145px;
-        opacity: 0.3;
+        opacity: 0.25;
     }
 
     .graphic-ring-one {
@@ -1598,38 +1719,38 @@ textarea::placeholder {
     }
 
     .banner-footer {
-        right: 12px;
-        left: 12px;
-        font-size: 6px;
+        right: 14px;
+        left: 14px;
+        font-size: 8px;
     }
 
     .overview-heading {
         align-items: flex-end;
-        margin-top: 29px;
+        margin-top: 28px;
     }
 
     .overview-heading h2 {
-        font-size: 13px;
+        font-size: 15px;
     }
 
     .overview-reference {
-        font-size: 6px;
+        font-size: 8px;
         text-align: right;
     }
 
     .dashboard-grid {
         grid-template-columns: 1fr;
-        gap: 9px;
+        gap: 11px;
     }
 
     .dashboard-card {
-        min-height: 175px;
-        padding: 17px;
+        min-height: 170px;
+        padding: 18px;
     }
 
     .dashboard-note {
         align-items: flex-start;
-        padding: 13px;
+        padding: 14px;
     }
 
     .note-status {
@@ -1637,13 +1758,13 @@ textarea::placeholder {
     }
 
     .management-section {
-        padding-top: 55px;
-        scroll-margin-top: 140px;
+        padding-top: 52px;
+        scroll-margin-top: 120px;
     }
 
     .section-heading {
         align-items: flex-start;
-        gap: 10px;
+        gap: 12px;
     }
 
     .section-heading h2 {
@@ -1651,12 +1772,12 @@ textarea::placeholder {
     }
 
     .section-heading .eyebrow {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .section-heading .section-description {
-        max-width: 340px;
-        font-size: 9px;
+        max-width: 100%;
+        font-size: 11px;
     }
 
     .section-reference {
@@ -1665,50 +1786,59 @@ textarea::placeholder {
 
     .section-reference strong {
         max-width: 100px;
-        font-size: 6px;
+        font-size: 8px;
     }
 
     .section-number {
-        font-size: 25px;
+        font-size: 24px;
     }
 
     .management-layout {
         grid-template-columns: minmax(0, 1fr);
-        gap: 12px;
+        gap: 14px;
     }
 
     .management-panel {
-        padding: 18px;
+        padding: 20px 18px 18px;
     }
 
     .management-panel h3 {
-        font-size: 12px;
+        font-size: 14px;
     }
 
+    .login-panel input,
     .management-panel input,
     .management-panel select,
     .management-panel textarea {
-        min-height: 45px;
-        padding: 13px;
-        font-size: 11px;
+        min-height: 48px;
+        padding: 13px 14px;
+        font-size: 16px;
     }
 
     .management-panel textarea {
-        min-height: 115px;
+        min-height: 120px;
     }
 
     .primary-button {
-        min-height: 47px;
+        min-height: 50px;
+        font-size: 12px;
+    }
+
+    .project-entry button,
+    .skill-entry button,
+    .timeline-entry button {
+        min-height: 42px;
+        padding: 10px 15px;
+        font-size: 11px;
     }
 
     .admin-footer {
         align-items: flex-start;
         flex-direction: column;
         gap: 10px;
-        margin-top: 55px;
-        font-size: 7px;
+        margin-top: 52px;
+        font-size: 9px;
     }
-
 }
 
 
@@ -1716,15 +1846,19 @@ textarea::placeholder {
    SMALL PHONES
 ========================================= */
 
-@media (max-width: 380px) {
-
+@media (max-width: 390px) {
     .login-panel {
-        padding: 25px 20px;
+        padding: 28px 18px 24px;
     }
 
     .login-footer {
         flex-direction: column;
         gap: 7px;
+    }
+
+    .portfolio-link {
+        font-size: 8px;
+        padding: 6px 8px;
     }
 
     .main-content {
@@ -1733,17 +1867,17 @@ textarea::placeholder {
     }
 
     .operations-banner {
-        padding-right: 17px;
-        padding-left: 20px;
+        padding-right: 16px;
+        padding-left: 18px;
     }
 
     .operations-copy h2 {
-        font-size: 26px;
+        font-size: 24px;
     }
 
     .overview-reference {
         max-width: 110px;
-        line-height: 1.6;
+        line-height: 1.5;
     }
 
     .section-reference {
@@ -1751,13 +1885,12 @@ textarea::placeholder {
     }
 
     .management-panel {
-        padding: 15px;
+        padding: 18px 16px 16px;
     }
 
     .database-divider {
-        font-size: 6px;
+        font-size: 8px;
     }
-
 }
 
 
@@ -1766,7 +1899,6 @@ textarea::placeholder {
 ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
     *,
     *::before,
     *::after {
@@ -1775,6 +1907,4 @@ textarea::placeholder {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-
 }
-
