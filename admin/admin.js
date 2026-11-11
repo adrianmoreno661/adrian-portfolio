@@ -22,10 +22,8 @@ import {
    CLOUDINARY CONFIGURATION
 ========================= */
 
-// Replace these with your Cloudinary details.
-
-const CLOUDINARY_CLOUD_NAME = "YOUR_CLOUD_NAME";
-const CLOUDINARY_UPLOAD_PRESET = "YOUR_UPLOAD_PRESET";
+const CLOUDINARY_CLOUD_NAME = "rhntuvx0";
+const CLOUDINARY_UPLOAD_PRESET = "am_portfolio";
 
 
 /* =========================
@@ -156,7 +154,6 @@ projectImage.addEventListener("change", () => {
 
     previewImage.src = previewUrl;
     projectImagePreview.hidden = false;
-
 });
 
 
@@ -166,23 +163,14 @@ projectImage.addEventListener("change", () => {
 
 async function uploadProjectImage(file) {
 
-    if (
-        CLOUDINARY_CLOUD_NAME === "YOUR_CLOUD_NAME" ||
-        CLOUDINARY_UPLOAD_PRESET === "YOUR_UPLOAD_PRESET"
-    ) {
-        throw new Error(
-            "Cloudinary has not been configured yet."
-        );
+    if (!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET) {
+        throw new Error("Cloudinary configuration is missing.");
     }
 
     const formData = new FormData();
 
     formData.append("file", file);
-    formData.append(
-        "upload_preset",
-        CLOUDINARY_UPLOAD_PRESET
-    );
-
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
     formData.append("folder", "am-motorsport/projects");
 
     const response = await fetch(
@@ -193,15 +181,13 @@ async function uploadProjectImage(file) {
         }
     );
 
-    if (!response.ok) {
-        const errorData = await response.json();
+    const data = await response.json();
 
+    if (!response.ok) {
         throw new Error(
-            errorData.error?.message || "Image upload failed."
+            data.error?.message || "Image upload failed."
         );
     }
-
-    const data = await response.json();
 
     return data.secure_url;
 }
@@ -313,8 +299,6 @@ function displayProjects() {
         const card = document.createElement("div");
         card.className = "project-entry";
 
-        // PROJECT IMAGE
-
         if (project.imageUrl) {
 
             const image = document.createElement("img");
@@ -357,10 +341,8 @@ function displayProjects() {
             clearImagePreview();
 
             if (currentImageUrl) {
-
                 previewImage.src = currentImageUrl;
                 projectImagePreview.hidden = false;
-
             }
 
             editingProjectId = project.id;
@@ -394,7 +376,6 @@ function displayProjects() {
             } catch (error) {
 
                 console.error(error);
-
                 alert("Could not delete the project.");
             }
         });
@@ -447,9 +428,7 @@ addProjectButton.addEventListener("click", async () => {
     const imageFile = projectImage.files[0];
 
     if (!name || !description) {
-
         alert("Please enter a project name and description.");
-
         return;
     }
 
@@ -467,13 +446,10 @@ addProjectButton.addEventListener("click", async () => {
     }
 
     addProjectButton.disabled = true;
-    addProjectButton.textContent = "SAVING PROJECT...";
 
     try {
 
         let imageUrl = currentImageUrl;
-
-        // Upload new image if selected.
 
         if (imageFile) {
 
@@ -527,9 +503,9 @@ addProjectButton.addEventListener("click", async () => {
 
         addProjectButton.disabled = false;
 
-        if (!editingProjectId) {
-            addProjectButton.textContent = "ADD PROJECT +";
-        }
+        addProjectButton.textContent = editingProjectId
+            ? "Save Changes"
+            : "ADD PROJECT +";
     }
 });
 
@@ -599,7 +575,6 @@ function displaySkills() {
             } catch (error) {
 
                 console.error(error);
-
                 alert("Could not delete the skill.");
             }
         });
@@ -654,7 +629,6 @@ addSkillButton.addEventListener("click", async () => {
     } catch (error) {
 
         console.error(error);
-
         alert("Could not save the skill.");
 
     } finally {
@@ -687,19 +661,15 @@ function displayTimeline() {
         card.className = "project-entry";
 
         const category = document.createElement("p");
-
         category.textContent = "Category: " + entry.category;
 
         const name = document.createElement("h4");
-
         name.textContent = entry.name;
 
         const role = document.createElement("p");
-
         role.textContent = entry.role;
 
         const location = document.createElement("p");
-
         location.textContent = "Location: " + entry.location;
 
         const editButton = document.createElement("button");
@@ -745,7 +715,6 @@ function displayTimeline() {
             } catch (error) {
 
                 console.error(error);
-
                 alert("Could not delete the timeline entry.");
             }
         });
@@ -785,7 +754,6 @@ addTimelineButton.addEventListener("click", async () => {
     if (!name || !role || !location) {
 
         alert("Please complete all timeline fields.");
-
         return;
     }
 
@@ -822,7 +790,6 @@ addTimelineButton.addEventListener("click", async () => {
     } catch (error) {
 
         console.error(error);
-
         alert("Could not save the timeline entry.");
 
     } finally {
