@@ -1,24 +1,37 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>AM Motorsport | Engineering Operations</title>
 
-    <!-- Custom Telemetry Fonts -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Audiowide&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Audiowide&family=JetBrains+Mono:wght@400;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-    <!-- SPEC-034 Admin Stylesheet -->
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="am-motorsport-admin.css">
 
-    <!-- iPhone 7 Plus Home Screen App Icon & Settings -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/image_d47d627b.jpg">
+    <!-- Apple Touch Icon -->
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="assets/image_d47d627b.jpg"
+    >
+
+    <!-- Apple Web App Settings -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="AM OPS">
 </head>
+
 <body>
 
     <!-- =========================
@@ -50,6 +63,7 @@
             <form id="login-form">
 
                 <label for="login-email">EMAIL ADDRESS</label>
+
                 <input
                     type="email"
                     id="login-email"
@@ -58,6 +72,7 @@
                 >
 
                 <label for="login-password">PASSWORD</label>
+
                 <input
                     type="password"
                     id="login-password"
@@ -88,7 +103,10 @@
 
     <div id="admin-app" class="admin-app" hidden>
 
-        <!-- SIDEBAR -->
+
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
 
         <aside class="sidebar">
 
@@ -163,15 +181,19 @@
         </aside>
 
 
-        <!-- MAIN CONTENT -->
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
 
         <main class="main-content">
+
 
             <!-- TOPBAR -->
 
             <header class="topbar">
 
                 <div>
+
                     <p class="breadcrumb">
                         AM MOTORSPORT / <span>OPERATIONS</span>
                     </p>
@@ -179,6 +201,7 @@
                     <h1 class="topbar-heading">
                         Engineering Control
                     </h1>
+
                 </div>
 
                 <div class="topbar-actions">
@@ -197,7 +220,9 @@
             </header>
 
 
-            <!-- DASHBOARD -->
+            <!-- =========================
+                 DASHBOARD
+            ========================== -->
 
             <section id="dashboard" class="admin-section">
 
@@ -253,9 +278,14 @@
             </section>
 
 
-            <!-- PROJECT MANAGEMENT -->
+            <!-- =========================
+                 PROJECT MANAGEMENT
+            ========================== -->
 
-            <section id="projects" class="admin-section management-section">
+            <section
+                id="projects"
+                class="admin-section management-section"
+            >
 
                 <div class="section-heading">
 
@@ -271,6 +301,7 @@
                 </div>
 
                 <div class="management-layout">
+
 
                     <!-- ADD PROJECT -->
 
@@ -293,6 +324,7 @@
                         <div class="database-divider"></div>
 
                         <label for="project-name">PROJECT NAME</label>
+
                         <input
                             type="text"
                             id="project-name"
@@ -300,13 +332,17 @@
                         >
 
                         <label for="project-status">PROJECT STATUS</label>
+
                         <select id="project-status">
                             <option value="Ideas">Ideas</option>
                             <option value="In Progress">In Progress</option>
                             <option value="Complete">Complete</option>
                         </select>
 
-                        <label for="project-description">PROJECT DESCRIPTION</label>
+                        <label for="project-description">
+                            PROJECT DESCRIPTION
+                        </label>
+
                         <textarea
                             id="project-description"
                             placeholder="Describe the project..."
@@ -355,9 +391,14 @@
             </section>
 
 
-            <!-- CAPABILITIES MANAGEMENT -->
+            <!-- =========================
+                 CAPABILITIES MANAGEMENT
+            ========================== -->
 
-            <section id="capabilities" class="admin-section management-section">
+            <section
+                id="capabilities"
+                class="admin-section management-section"
+            >
 
                 <div class="section-heading">
 
@@ -373,6 +414,7 @@
                 </div>
 
                 <div class="management-layout">
+
 
                     <!-- ADD SKILL -->
 
@@ -395,6 +437,7 @@
                         <div class="database-divider"></div>
 
                         <label for="skill-name">SKILL NAME</label>
+
                         <input
                             type="text"
                             id="skill-name"
@@ -443,9 +486,14 @@
             </section>
 
 
-            <!-- DEVELOPMENT HISTORY -->
+            <!-- =========================
+                 DEVELOPMENT HISTORY
+            ========================== -->
 
-            <section id="timeline" class="admin-section management-section">
+            <section
+                id="timeline"
+                class="admin-section management-section"
+            >
 
                 <div class="section-heading">
 
@@ -461,6 +509,7 @@
                 </div>
 
                 <div class="management-layout">
+
 
                     <!-- ADD TIMELINE ENTRY -->
 
@@ -483,13 +532,17 @@
                         <div class="database-divider"></div>
 
                         <label for="timeline-category">CATEGORY</label>
+
                         <select id="timeline-category">
                             <option value="School">School</option>
                             <option value="Internship">Internship</option>
                             <option value="Work">Work</option>
                         </select>
 
-                        <label for="timeline-name">ORGANIZATION / SCHOOL</label>
+                        <label for="timeline-name">
+                            ORGANIZATION / SCHOOL
+                        </label>
+
                         <input
                             type="text"
                             id="timeline-name"
@@ -497,13 +550,17 @@
                         >
 
                         <label for="timeline-role">ROLE / PROGRAM</label>
+
                         <input
                             type="text"
                             id="timeline-role"
                             placeholder="Enter role or program"
                         >
 
-                        <label for="timeline-location">LOCATION / DATE</label>
+                        <label for="timeline-location">
+                            LOCATION / DATE
+                        </label>
+
                         <input
                             type="text"
                             id="timeline-location"
@@ -552,7 +609,9 @@
             </section>
 
 
-            <!-- FOOTER -->
+            <!-- =========================
+                 FOOTER
+            ========================== -->
 
             <footer class="admin-footer">
 
@@ -575,9 +634,12 @@
     </div>
 
 
-    <!-- FIREBASE ADMIN LOGIC -->
+    <!-- =========================
+         FIREBASE ADMIN LOGIC
+    ========================== -->
 
     <script type="module" src="admin.js"></script>
 
 </body>
 </html>
+
