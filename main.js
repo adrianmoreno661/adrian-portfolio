@@ -86,9 +86,14 @@ onSnapshot(
                 newestProject.summary ||
                 "No description available.";
 
-            // Update project image when available
-            if (newestProject.image) {
-                image.src = newestProject.image;
+            // Update project image
+            const projectImage =
+                newestProject.imageUrl ||
+                newestProject.image ||
+                "";
+
+            if (projectImage) {
+                image.src = projectImage;
             }
 
             // Open Projects page
