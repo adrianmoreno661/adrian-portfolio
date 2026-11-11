@@ -1,3 +1,8 @@
+
+/* =========================
+   RESUME PAGE
+========================= */
+
 html {
     scroll-snap-type: none;
 }
@@ -7,11 +12,14 @@ body {
 }
 
 .resume-wrapper {
-    padding-top: 115px;
-    padding-bottom: 4rem;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 115px 2rem 4rem;
     display: flex;
     flex-direction: column;
     gap: 2.2rem;
+    min-width: 0;
 }
 
 /* =========================
@@ -25,6 +33,7 @@ body {
     gap: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #232326;
+    min-width: 0;
 }
 
 .resume-hero-left {
@@ -32,17 +41,22 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    min-width: 0;
 }
 
 .resume-hero-left .name {
     font-family: "Audiowide", sans-serif;
-    font-size: 2.6rem;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    line-height: 1.2;
+    white-space: normal;
+    overflow-wrap: anywhere;
     margin-bottom: 0.4rem;
 }
 
 .resume-hero-left .job {
     font-family: "JetBrains Mono", monospace;
     font-size: 1.15rem;
+    line-height: 1.5;
 }
 
 .resume-hero-left .cta-btn {
@@ -50,6 +64,7 @@ body {
     margin-top: 1.4rem;
     padding: 0.75rem 1.8rem;
     font-size: 1rem;
+    text-align: center;
 }
 
 .resume-hero-right {
@@ -57,11 +72,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 0;
 }
 
 .resume-photo {
     width: 220px;
     height: 220px;
+    max-width: 100%;
     object-fit: cover;
     border-radius: 12px;
     border: 1px solid #232326;
@@ -72,10 +89,16 @@ body {
    CAPABILITY BUBBLES
 ========================= */
 
+.capabilities-section {
+    min-width: 0;
+}
+
 .section-heading {
     color: #DC2626;
     font-family: "Audiowide", sans-serif;
     font-size: 1.6rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
     margin: 0 0 1.2rem 0;
 }
 
@@ -83,6 +106,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 0.85rem;
+    min-width: 0;
 }
 
 .skill-bubble {
@@ -93,6 +117,8 @@ body {
     padding: 0.6rem 1.3rem;
     font-family: "JetBrains Mono", monospace;
     font-size: 0.9rem;
+    max-width: 100%;
+    overflow-wrap: anywhere;
     transition: all 0.25s ease;
 }
 
@@ -110,8 +136,20 @@ body {
     width: 100%;
     overflow: hidden;
     padding: 0.5rem 0;
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 8%,
+        black 92%,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 8%,
+        black 92%,
+        transparent
+    );
 }
 
 .marquee-window {
@@ -123,6 +161,11 @@ body {
     display: flex;
     gap: 2rem;
     width: max-content;
+    animation: none;
+}
+
+/* Only animate when JavaScript adds this class */
+.marquee-track.is-animated {
     animation: scrollTimeline 22s linear infinite;
 }
 
@@ -130,6 +173,7 @@ body {
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(calc(-50% - 1rem));
     }
@@ -141,10 +185,12 @@ body {
     border-radius: 12px;
     padding: 1.8rem;
     width: 310px;
+    max-width: calc(100vw - 3rem);
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-wrap: anywhere;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
     transition: transform 0.25s ease, border-color 0.25s ease;
 }
@@ -164,13 +210,13 @@ body {
     margin-bottom: 0.5rem;
 }
 
-
 .timeline-card h3 {
     color: #FFFFFF;
     font-family: "Audiowide", sans-serif;
     font-size: 1.25rem;
     margin: 0 0 0.4rem 0;
     line-height: 1.3;
+    overflow-wrap: anywhere;
 }
 
 .card-role {
@@ -180,6 +226,7 @@ body {
     font-weight: 500;
     letter-spacing: 0.05rem;
     margin: 0 0 1.2rem 0;
+    overflow-wrap: anywhere;
 }
 
 .card-location {
@@ -188,6 +235,40 @@ body {
     font-size: 0.85rem;
     border-top: 1px solid #232326;
     padding-top: 0.8rem;
+    overflow-wrap: anywhere;
+}
+
+/* Pause timeline when hovered or keyboard-focused */
+@media (hover: hover) and (pointer: fine) {
+    .marquee-section:hover .marquee-track.is-animated {
+        animation-play-state: paused;
+    }
+}
+
+/* =========================
+   TABLET RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .resume-wrapper {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .resume-hero {
+        gap: 1.5rem;
+    }
+
+    .resume-photo {
+        width: 190px;
+        height: 190px;
+    }
+
+    .timeline-card {
+        width: 280px;
+    }
+
 }
 
 /* =========================
@@ -195,8 +276,9 @@ body {
 ========================= */
 
 @media (max-width: 768px) {
+
     .resume-wrapper {
-        padding-top: 105px;
+        padding: 105px 1.25rem 3rem;
         gap: 2rem;
     }
 
@@ -211,7 +293,15 @@ body {
     }
 
     .resume-hero-left .name {
-        font-size: 2.2rem;
+        font-size: clamp(1.8rem, 7vw, 2.2rem);
+    }
+
+    .resume-hero-left .job {
+        font-size: 0.95rem;
+    }
+
+    .resume-hero-left .cta-btn {
+        font-size: 0.9rem;
     }
 
     .resume-photo {
@@ -223,12 +313,109 @@ body {
         text-align: center;
     }
 
+    .section-heading {
+        font-size: 1.4rem;
+    }
+
     .bubbles-container {
         justify-content: center;
+        gap: 0.65rem;
+    }
+
+    .skill-bubble {
+        font-size: 0.8rem;
+        padding: 0.55rem 1rem;
+    }
+
+    .marquee-section {
+        mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 3%,
+            black 97%,
+            transparent
+        );
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 3%,
+            black 97%,
+            transparent
+        );
     }
 
     .timeline-card {
         width: 260px;
         padding: 1.4rem;
     }
+
+}
+
+/* =========================
+   SMALL PHONE SUPPORT
+========================= */
+
+@media (max-width: 480px) {
+
+    .resume-wrapper {
+        padding: 100px 1rem 2.5rem;
+        gap: 1.7rem;
+    }
+
+    .resume-hero-left .name {
+        font-size: clamp(1.65rem, 7.5vw, 2rem);
+    }
+
+    .resume-hero-left .job {
+        font-size: 0.85rem;
+    }
+
+    .resume-photo {
+        width: 150px;
+        height: 150px;
+    }
+
+    .section-heading {
+        font-size: 1.25rem;
+    }
+
+    .skill-bubble {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .timeline-card {
+        width: 240px;
+        padding: 1.2rem;
+    }
+
+    .timeline-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .card-role {
+        font-size: 0.85rem;
+    }
+
+    .card-location {
+        font-size: 0.75rem;
+    }
+
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .marquee-track.is-animated {
+        animation: none;
+    }
+
+    .skill-bubble,
+    .timeline-card {
+        transition: none;
+    }
+
 }
