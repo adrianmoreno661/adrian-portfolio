@@ -12,19 +12,36 @@ import {
 
 const skillsContainer = document.getElementById("skills-container");
 
-onSnapshot(collection(db, "skills"), (snapshot) => {
-    skillsContainer.innerHTML = "";
+if (skillsContainer) {
 
-    snapshot.forEach((doc) => {
-        const skill = doc.data();
+    onSnapshot(
+        collection(db, "skills"),
 
-        const bubble = document.createElement("div");
-        bubble.className = "skill-bubble";
-        bubble.textContent = skill.name || "Unnamed Skill";
+        (snapshot) => {
 
-        skillsContainer.appendChild(bubble);
-    });
-});
+            skillsContainer.innerHTML = "";
+
+            snapshot.forEach((doc) => {
+
+                const skill = doc.data();
+
+                const bubble = document.createElement("div");
+
+                bubble.className = "skill-bubble";
+                bubble.textContent = skill.name || "Unnamed Skill";
+
+                skillsContainer.appendChild(bubble);
+            });
+
+        },
+
+        (error) => {
+            console.error("Error loading skills:", error);
+        }
+    );
+
+}
+
 
 // =========================
 // TIMELINE
@@ -32,54 +49,100 @@ onSnapshot(collection(db, "skills"), (snapshot) => {
 
 const timelineTrack = document.getElementById("timeline-track");
 
-onSnapshot(collection(db, "timeline"), (snapshot) => {
-    timelineTrack.innerHTML = "";
+if (timelineTrack) {
 
-    const entries = [];
+    onSnapshot(
+        collection(db, "timeline"),
 
-    snapshot.forEach((doc) => {
-        entries.push(doc.data());
-    });
+        (snapshot) => {
 
-    // Create a timeline card
-    function createTimelineCard(entry) {
-        const card = document.createElement("div");
-        card.className = "timeline-card";
+            // Reset timeline
+            timelineTrack.classList.remove("is-animated");
+            timelineTrack.innerHTML = "";
 
-        const tag = document.createElement("span");
-        tag.className = "card-tag";
-        tag.textContent = entry.category || "Experience";
+            const entries = [];
 
-        const title = document.createElement("h3");
-        title.textContent = entry.name || "Untitled";
+            snapshot.forEach((doc) => {
+                entries.push(doc.data());
+            });
 
-        const role = document.createElement("p");
-        role.className = "card-role";
-        role.textContent = entry.role || "";
 
-        const location = document.createElement("div");
-        location.className = "card-location";
-        location.textContent = entry.location || "";
+            // =========================
+            // CREATE TIMELINE CARD
+            // =========================
 
-        card.append(tag, title, role, location);
+            function createTimelineCard(entry) {
 
-        return card;
-    }
+                const card = document.createElement("div");
 
-    // Display original entries
-    entries.forEach((entry) => {
-        timelineTrack.appendChild(createTimelineCard(entry));
-    });
+                card.className = "timeline-card";
 
-    // Duplicate entries for the infinite scrolling effect
-    // Only when there are at least four entries
-    if (entries.length >= 4) {
-        entries.forEach((entry) => {
-            const duplicate = createTimelineCard(entry);
+                const tag = document.createElement("span");
 
-            duplicate.setAttribute("aria-hidden", "true");
+                tag.className = "card-tag";
+                tag.textContent = entry.category || "Experience";
 
-            timelineTrack.appendChild(duplicate);
-        });
-    }
-});
+                const title = document.createElement("h3");
+
+                title.textContent = entry.name || "Untitled";
+
+                const role = document.createElement("p");
+
+                role.className = "card-role";
+                role.textContent = entry.role || "";
+
+                const location = document.createElement("div");
+
+                location.className = "card-location";
+                location.textContent = entry.location || "";
+
+                card.append(tag, title, role, location);
+
+                return card;
+            }
+
+
+            // =========================
+            // DISPLAY ORIGINAL ENTRIES
+            // =========================
+
+            entries.forEach((entry) => {
+
+                timelineTrack.appendChild(
+                    createTimelineCard(entry)
+                );
+
+            });
+
+
+            // =========================
+            // INFINITE SCROLL
+            // =========================
+
+            if (entries.length >= 4) {
+
+                entries.forEach((entry) => {
+
+                    const duplicate = createTimelineCard(entry);
+
+                    duplicate.setAttribute("aria-hidden", "true");
+
+                    timelineTrack.appendChild(duplicate);
+
+                });
+
+                // Start animation only after duplication
+                timelineTrack.classList.add("is-animated");
+
+            }
+
+        },
+
+        (error) => {
+
+            console.error("Error loading timeline:", error);
+
+        }
+    );
+
+}
