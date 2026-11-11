@@ -58,7 +58,6 @@ function safeURL(value) {
     return "";
 }
 
-// Keep status names consistent
 function normalizeStatus(value = "") {
     return String(value)
         .trim()
@@ -107,7 +106,12 @@ function initProjects() {
                         data.summary ||
                         "",
 
-                    image: data.image || "",
+                    // Supports both the old image field
+                    // and the new Cloudinary imageUrl field.
+                    image:
+                        data.imageUrl ||
+                        data.image ||
+                        "",
 
                     link: data.link || "",
 
@@ -281,7 +285,6 @@ function openModal(project, triggerButton) {
     const modalTags = document.getElementById("modal-tags");
     const modalLink = document.getElementById("modal-link");
 
-    // Check that required modal elements exist
     if (
         !modalImage ||
         !badge ||
@@ -295,10 +298,7 @@ function openModal(project, triggerButton) {
         return;
     }
 
-    // Remember which button opened the modal
     lastFocusedElement = triggerButton || document.activeElement;
-
-    // Remember the existing page scroll setting
     previousBodyOverflow = document.body.style.overflow;
 
     const statusSlug = normalizeStatus(project.status);
@@ -340,14 +340,11 @@ function openModal(project, triggerButton) {
         modalLink.removeAttribute("href");
     }
 
-    // Open modal
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
 
-    // Prevent background scrolling
     document.body.style.overflow = "hidden";
 
-    // Move keyboard focus to the close button
     if (modalClose) {
         modalClose.focus();
     }
@@ -361,10 +358,8 @@ function closeModal() {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
 
-    // Restore normal page scrolling
     document.body.style.overflow = previousBodyOverflow;
 
-    // Return focus to the button that opened the modal
     if (
         lastFocusedElement &&
         document.contains(lastFocusedElement)
@@ -408,9 +403,11 @@ filterButtons.forEach(button => {
 
         filterButtons.forEach(item => {
             item.classList.remove("active");
+            item.setAttribute("aria-pressed", "false");
         });
 
         button.classList.add("active");
+        button.setAttribute("aria-pressed", "true");
 
         activeFilter = button.dataset.filter || "all";
 
@@ -437,7 +434,7 @@ if (modalClose) {
 }
 
 
-// Close when clicking outside the modal content
+// Close when clicking outside modal content
 if (modal) {
 
     modal.addEventListener("click", event => {
