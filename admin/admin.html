@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,32 +9,69 @@
     <title>AM Motorsport | Engineering Operations</title>
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
-        href="https://googleapis.com/css2?family=Audiowide&family=JetBrains+Mono:wght@400;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Audiowide&family=JetBrains+Mono:wght@400;600;700;800&display=swap"
         rel="stylesheet"
     >
 
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="admin.css">
 
-    <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="../assets/logo.jpg">
 
-    <!-- Apple Web App Settings -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="portfolio Admin">
+
+    <!-- Image Preview Styling -->
+    <style>
+        .project-image-upload {
+            margin-top: 12px;
+        }
+
+        .project-image-upload input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px dashed #414650;
+            background: #0d0e11;
+            color: #94A3B8;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .project-image-preview {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #23262e;
+            background: #0d0e11;
+        }
+
+        .project-image-preview img {
+            display: block;
+            width: 100%;
+            max-height: 220px;
+            object-fit: cover;
+        }
+
+        .project-image-preview p {
+            margin: 10px 0 0;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: #94A3B8;
+        }
+
+        .project-image-preview[hidden] {
+            display: none;
+        }
+    </style>
+
 </head>
-
-
 
 <body>
 
-    <!-- =========================
-         LOGIN SCREEN
-    ========================== -->
+    <!-- LOGIN SCREEN -->
 
     <section id="login-screen" class="login-screen">
 
@@ -94,16 +132,11 @@
     </section>
 
 
-    <!-- =========================
-         ADMIN APPLICATION
-    ========================== -->
+    <!-- ADMIN APPLICATION -->
 
     <div id="admin-app" class="admin-app" hidden>
 
-
-        <!-- =========================
-             SIDEBAR
-        ========================== -->
+        <!-- SIDEBAR -->
 
         <aside class="sidebar">
 
@@ -178,12 +211,9 @@
         </aside>
 
 
-        <!-- =========================
-             MAIN CONTENT
-        ========================== -->
+        <!-- MAIN CONTENT -->
 
         <main class="main-content">
-
 
             <!-- TOPBAR -->
 
@@ -217,9 +247,7 @@
             </header>
 
 
-            <!-- =========================
-                 DASHBOARD
-            ========================== -->
+            <!-- DASHBOARD -->
 
             <section id="dashboard" class="admin-section">
 
@@ -275,14 +303,9 @@
             </section>
 
 
-            <!-- =========================
-                 PROJECT MANAGEMENT
-            ========================== -->
+            <!-- PROJECT MANAGEMENT -->
 
-            <section
-                id="projects"
-                class="admin-section management-section"
-            >
+            <section id="projects" class="admin-section management-section">
 
                 <div class="section-heading">
 
@@ -298,7 +321,6 @@
                 </div>
 
                 <div class="management-layout">
-
 
                     <!-- ADD PROJECT -->
 
@@ -346,6 +368,38 @@
                             rows="5"
                         ></textarea>
 
+                        <!-- PROJECT IMAGE UPLOAD -->
+
+                        <label for="project-image">
+                            PROJECT IMAGE
+                        </label>
+
+                        <div class="project-image-upload">
+
+                            <input
+                                type="file"
+                                id="project-image"
+                                accept="image/jpeg,image/png,image/webp,image/gif"
+                            >
+
+                            <div
+                                id="project-image-preview"
+                                class="project-image-preview"
+                                hidden
+                            >
+
+                                <img
+                                    id="preview-image"
+                                    src=""
+                                    alt="Selected project image preview"
+                                >
+
+                                <p>IMAGE READY FOR UPLOAD</p>
+
+                            </div>
+
+                        </div>
+
                         <button id="add-project">
                             ADD PROJECT +
                         </button>
@@ -388,14 +442,9 @@
             </section>
 
 
-            <!-- =========================
-                 CAPABILITIES MANAGEMENT
-            ========================== -->
+            <!-- CAPABILITIES MANAGEMENT -->
 
-            <section
-                id="capabilities"
-                class="admin-section management-section"
-            >
+            <section id="capabilities" class="admin-section management-section">
 
                 <div class="section-heading">
 
@@ -411,7 +460,6 @@
                 </div>
 
                 <div class="management-layout">
-
 
                     <!-- ADD SKILL -->
 
@@ -483,14 +531,9 @@
             </section>
 
 
-            <!-- =========================
-                 DEVELOPMENT HISTORY
-            ========================== -->
+            <!-- DEVELOPMENT HISTORY -->
 
-            <section
-                id="timeline"
-                class="admin-section management-section"
-            >
+            <section id="timeline" class="admin-section management-section">
 
                 <div class="section-heading">
 
@@ -506,7 +549,6 @@
                 </div>
 
                 <div class="management-layout">
-
 
                     <!-- ADD TIMELINE ENTRY -->
 
@@ -606,9 +648,7 @@
             </section>
 
 
-            <!-- =========================
-                 FOOTER
-            ========================== -->
+            <!-- FOOTER -->
 
             <footer class="admin-footer">
 
@@ -631,12 +671,63 @@
     </div>
 
 
-    <!-- =========================
-         FIREBASE ADMIN LOGIC
-    ========================== -->
+    <!-- IMAGE PREVIEW SCRIPT -->
+
+    <script>
+        const projectImageInput = document.getElementById("project-image");
+        const projectImagePreview = document.getElementById("project-image-preview");
+        const previewImage = document.getElementById("preview-image");
+
+        let projectPreviewUrl = null;
+
+        projectImageInput.addEventListener("change", function () {
+
+            const file = this.files[0];
+
+            if (projectPreviewUrl) {
+                URL.revokeObjectURL(projectPreviewUrl);
+                projectPreviewUrl = null;
+            }
+
+            if (!file) {
+                projectImagePreview.hidden = true;
+                previewImage.removeAttribute("src");
+                return;
+            }
+
+            if (!file.type.startsWith("image/")) {
+                alert("Please select a valid image.");
+                this.value = "";
+                projectImagePreview.hidden = true;
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                alert("Please select an image smaller than 5 MB.");
+                this.value = "";
+                projectImagePreview.hidden = true;
+                return;
+            }
+
+            projectPreviewUrl = URL.createObjectURL(file);
+
+            previewImage.src = projectPreviewUrl;
+            projectImagePreview.hidden = false;
+
+        });
+
+        window.addEventListener("beforeunload", function () {
+            if (projectPreviewUrl) {
+                URL.revokeObjectURL(projectPreviewUrl);
+            }
+        });
+    </script>
+
+
+    <!-- FIREBASE ADMIN LOGIC -->
 
     <script type="module" src="admin.js"></script>
 
 </body>
-</html>
 
+</html>
