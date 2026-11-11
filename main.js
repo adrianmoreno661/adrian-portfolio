@@ -6,60 +6,99 @@ import {
     onSnapshot
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-// Get the homepage project cards
+// =========================
+// HOMEPAGE PROJECT CARDS
+// =========================
+
 const projectCards = {
     "Ideas": document.querySelector(".pipeline-column:nth-child(1) .pipeline-card"),
     "In Progress": document.querySelector(".pipeline-column:nth-child(2) .pipeline-card"),
     "Complete": document.querySelector(".pipeline-column:nth-child(3) .pipeline-card")
 };
 
-// Listen for project updates from Firebase
-onSnapshot(collection(db, "projects"), (snapshot) => {
+// =========================
+// FIREBASE PROJECT UPDATES
+// =========================
 
-    const projects = [];
+onSnapshot(
+    collection(db, "projects"),
 
-    snapshot.forEach((doc) => {
-        projects.push({
-            id: doc.id,
-            ...doc.data()
-        });
-    });
+    (snapshot) => {
 
-    // Find the newest project in each category
-    Object.entries(projectCards).forEach(([status, card]) => {
+        const projects = [];
 
-        const matchingProjects = projects.filter((project) =>
-            (project.status || "").toLowerCase().replace("-", " ") === status.toLowerCase()
-        );
-
-        // Sort newest first
-        matchingProjects.sort((a, b) => {
-            const dateA = a.createdAt?.toMillis?.() || 0;
-            const dateB = b.createdAt?.toMillis?.() || 0;
-
-            return dateB - dateA;
+        snapshot.forEach((doc) => {
+            projects.push({
+                id: doc.id,
+                ...doc.data()
+            });
         });
 
-        const newestProject = matchingProjects[0];
+        // Find the newest project in each category
+        Object.entries(projectCards).forEach(([status, card]) => {
 
-        if (!newestProject) {
-            return;
-        }
+            if (!card) return;
 
-        // Update card title and description
-        const title = card.querySelector(".pipeline-card-back h3");
-        const description = card.querySelector(".pipeline-card-back p");
-        const image = card.querySelector(".pipeline-card-front img");
+            const title = card.querySelector(".pipeline-card-back h3");
+            const description = card.querySelector(".pipeline-card-back p");
+            const image = card.querySelector(".pipeline-card-front img");
 
-        title.textContent = newestProject.name || newestProject.title || "Untitled Project";
-        description.textContent = newestProject.description || newestProject.summary || "No description available.";
+            if (!title || !description || !image) return;
 
-        if (newestProject.image) {
-            image.src = newestProject.image;
-        }
+            // Normalize project status
+            const matchingProjects = projects.filter((project) => {
 
-        // Open the Projects page when clicked
-        card.href = `projects.html`;
-    });
+                const projectStatus = (project.status || "")
+                    .toLowerCase()
+                    .replace(/[-_]/g, " ")
+                    .trim();
 
-});
+                return projectStatus === status.toLowerCase();
+            });
+
+            // Sort newest first
+            matchingProjects.sort((a, b) => {
+
+                const dateA = a.createdAt?.toMillis?.() || 0;
+                const dateB = b.createdAt?.toMillis?.() || 0;
+
+                return dateB - dateA;
+            });
+
+            const newestProject = matchingProjects[0];
+
+            // No project found
+            if (!newestProject) {
+                title.textContent = "No Projects Yet";
+                description.textContent = "Check back later for updates.";
+                card.removeAttribute("href");
+                return;
+            }
+
+            // Update project information
+            title.textContent =
+                newestProject.name ||
+                newestProject.title ||
+                "Untitled Project";
+
+            description.textContent =
+                newestProject.description ||
+                newestProject.summary ||
+                "No description available.";
+
+            // Update project image when available
+            if (newestProject.image) {
+                image.src = newestProject.image;
+            }
+
+            // Open Projects page
+            card.href = "projects.html";
+
+        });
+
+    },
+
+    (error) => {
+        console.error("Error loading homepage projects:", error);
+    }
+);
