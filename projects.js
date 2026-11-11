@@ -6,7 +6,6 @@ import {
     onSnapshot
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-
 /* =========================
    PROJECT DATA
 ========================= */
@@ -14,6 +13,9 @@ import {
 let allProjects = [];
 let activeFilter = "all";
 let searchQuery = "";
+
+let lastFocusedElement = null;
+let previousBodyOverflow = "";
 
 const grid = document.getElementById("projects-grid");
 const statusMsg = document.getElementById("status-message");
@@ -42,14 +44,28 @@ function safeURL(value) {
     try {
         const url = new URL(value);
 
-        if (url.protocol === "https:" || url.protocol === "http:") {
+        if (
+            url.protocol === "https:" ||
+            url.protocol === "http:"
+        ) {
             return escapeHTML(url.href);
         }
+
     } catch (error) {
         return "";
     }
 
     return "";
+}
+
+// Keep status names consistent
+function normalizeStatus(value = "") {
+    return String(value)
+        .trim()
+        .toLowerCase()
+        .replace(/[\s_]+/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/[^a-z0-9-]/g, "");
 }
 
 
@@ -58,6 +74,7 @@ function safeURL(value) {
 ========================= */
 
 function initProjects() {
+
     showStatus("Loading projects...");
 
     onSnapshot(
@@ -66,18 +83,29 @@ function initProjects() {
         (snapshot) => {
 
             allProjects = snapshot.docs.map(document => {
+
                 const data = document.data();
 
                 return {
                     id: document.id,
 
-                    title: data.title || data.name || "Untitled Project",
+                    title:
+                        data.title ||
+                        data.name ||
+                        "Untitled Project",
 
                     status: data.status || "Ideas",
 
-                    summary: data.summary || data.description || "",
+                    summary:
+                        data.summary ||
+                        data.description ||
+                        "",
 
-                    details: data.details || data.description || data.summary || "",
+                    details:
+                        data.details ||
+                        data.description ||
+                        data.summary ||
+                        "",
 
                     image: data.image || "",
 
@@ -85,7 +113,9 @@ function initProjects() {
 
                     date: data.date || "",
 
-                    tags: Array.isArray(data.tags) ? data.tags : []
+                    tags: Array.isArray(data.tags)
+                        ? data.tags
+                        : []
                 };
             });
 
@@ -93,7 +123,11 @@ function initProjects() {
         },
 
         (error) => {
-            console.error("Firebase project loading error:", error);
+
+            console.error(
+                "Firebase project loading error:",
+                error
+            );
 
             showStatus(
                 "Could not load projects. Please check your Firebase connection and Firestore read permissions."
@@ -111,13 +145,11 @@ function applyFilters() {
 
     const filtered = allProjects.filter(project => {
 
-        const statusSlug = project.status
-            .toLowerCase()
-            .replace(/\s+/g, "-");
+        const statusSlug = normalizeStatus(project.status);
 
         const matchesFilter =
             activeFilter === "all" ||
-            statusSlug === activeFilter;
+            statusSlug === normalizeStatus(activeFilter);
 
         const searchableText = [
             project.title,
@@ -142,6 +174,8 @@ function applyFilters() {
 
 function renderGrid(projects) {
 
+    if (!grid) return;
+
     grid.innerHTML = "";
 
     if (projects.length === 0) {
@@ -159,9 +193,7 @@ function renderGrid(projects) {
 
     projects.forEach(project => {
 
-        const statusSlug = project.status
-            .toLowerCase()
-            .replace(/\s+/g, "-");
+        const statusSlug = normalizeStatus(project.status);
 
         const tagsHTML = project.tags
             .map(tag => `<span class="tag">${escapeHTML(tag)}</span>`)
@@ -182,7 +214,7 @@ function renderGrid(projects) {
                     : `<div class="card-image-placeholder"></div>`
                 }
 
-                <span class="status-badge ${escapeHTML(statusSlug)}">
+                <span class="status-badge ${statusSlug}">
                     ${escapeHTML(project.status)}
                 </span>
 
@@ -219,14 +251,14 @@ function renderGrid(projects) {
                     }
 
                 </div>
-
             </div>
         `;
 
-        card.querySelector(".details-btn").addEventListener(
-            "click",
-            () => openModal(project)
-        );
+        const detailsButton = card.querySelector(".details-btn");
+
+        detailsButton.addEventListener("click", () => {
+            openModal(project, detailsButton);
+        });
 
         grid.appendChild(card);
     });
@@ -237,59 +269,110 @@ function renderGrid(projects) {
    PROJECT DETAILS MODAL
 ========================= */
 
-function openModal(project) {
+function openModal(project, triggerButton) {
 
-    const statusSlug = project.status
-        .toLowerCase()
-        .replace(/\s+/g, "-");
+    if (!modal) return;
 
     const modalImage = document.getElementById("modal-img");
-    const imageURL = safeURL(project.image);
+    const badge = document.getElementById("modal-status");
+    const modalTitle = document.getElementById("modal-title");
+    const modalDate = document.getElementById("modal-date");
+    const modalDescription = document.getElementById("modal-desc");
+    const modalTags = document.getElementById("modal-tags");
+    const modalLink = document.getElementById("modal-link");
 
+    // Check that required modal elements exist
+    if (
+        !modalImage ||
+        !badge ||
+        !modalTitle ||
+        !modalDate ||
+        !modalDescription ||
+        !modalTags ||
+        !modalLink
+    ) {
+        console.error("One or more project modal elements are missing.");
+        return;
+    }
+
+    // Remember which button opened the modal
+    lastFocusedElement = triggerButton || document.activeElement;
+
+    // Remember the existing page scroll setting
+    previousBodyOverflow = document.body.style.overflow;
+
+    const statusSlug = normalizeStatus(project.status);
+    const imageURL = safeURL(project.image);
+    const projectLink = safeURL(project.link);
+
+    // Project image
     modalImage.src = imageURL || "";
     modalImage.alt = project.title;
     modalImage.style.display = imageURL ? "block" : "none";
 
-    const badge = document.getElementById("modal-status");
-
+    // Status
     badge.textContent = project.status;
     badge.className = `status-badge ${statusSlug}`;
 
-    document.getElementById("modal-title").textContent =
-        project.title;
+    // Project information
+    modalTitle.textContent = project.title;
 
-    document.getElementById("modal-date").textContent =
+    modalDate.textContent =
         project.date ? `Timeline: ${project.date}` : "";
 
-    document.getElementById("modal-desc").textContent =
+    modalDescription.textContent =
         project.details || project.summary;
 
-    document.getElementById("modal-tags").innerHTML =
-        project.tags
-            .map(tag => `<span class="tag">${escapeHTML(tag)}</span>`)
-            .join("");
+    // Project tags
+    modalTags.innerHTML = project.tags
+        .map(tag => `<span class="tag">${escapeHTML(tag)}</span>`)
+        .join("");
 
-    const modalLink = document.getElementById("modal-link");
-    const projectLink = safeURL(project.link);
-
+    // External project link
     if (projectLink) {
+
         modalLink.href = projectLink;
         modalLink.style.display = "inline-flex";
+
     } else {
+
         modalLink.style.display = "none";
         modalLink.removeAttribute("href");
     }
 
+    // Open modal
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
+
+    // Prevent background scrolling
+    document.body.style.overflow = "hidden";
+
+    // Move keyboard focus to the close button
+    if (modalClose) {
+        modalClose.focus();
+    }
 }
 
 
 function closeModal() {
 
-    modal.classList.remove("open");
+    if (!modal) return;
 
+    modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
+
+    // Restore normal page scrolling
+    document.body.style.overflow = previousBodyOverflow;
+
+    // Return focus to the button that opened the modal
+    if (
+        lastFocusedElement &&
+        document.contains(lastFocusedElement)
+    ) {
+        lastFocusedElement.focus();
+    }
+
+    lastFocusedElement = null;
 }
 
 
@@ -299,12 +382,16 @@ function closeModal() {
 
 function showStatus(message) {
 
+    if (!statusMsg) return;
+
     statusMsg.textContent = message;
     statusMsg.style.display = "block";
 }
 
 
 function hideStatus() {
+
+    if (!statusMsg) return;
 
     statusMsg.style.display = "none";
 }
@@ -314,47 +401,60 @@ function hideStatus() {
    EVENT LISTENERS
 ========================= */
 
+// Project filters
 filterButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
-        filterButtons.forEach(item =>
-            item.classList.remove("active")
-        );
+        filterButtons.forEach(item => {
+            item.classList.remove("active");
+        });
 
         button.classList.add("active");
 
-        activeFilter = button.dataset.filter;
+        activeFilter = button.dataset.filter || "all";
 
         applyFilters();
     });
 });
 
 
-searchInput.addEventListener("input", event => {
+// Project search
+if (searchInput) {
 
-    searchQuery = event.target.value.trim();
+    searchInput.addEventListener("input", event => {
 
-    applyFilters();
-});
+        searchQuery = event.target.value.trim();
 
-
-modalClose.addEventListener("click", closeModal);
-
-
-modal.addEventListener("click", event => {
-
-    if (event.target === modal) {
-        closeModal();
-    }
-});
+        applyFilters();
+    });
+}
 
 
+// Close button
+if (modalClose) {
+    modalClose.addEventListener("click", closeModal);
+}
+
+
+// Close when clicking outside the modal content
+if (modal) {
+
+    modal.addEventListener("click", event => {
+
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+}
+
+
+// Close with Escape key
 document.addEventListener("keydown", event => {
 
     if (
         event.key === "Escape" &&
-        modal.classList.contains("open")
+        modal?.classList.contains("open")
     ) {
         closeModal();
     }
