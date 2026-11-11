@@ -41,29 +41,45 @@ onSnapshot(collection(db, "timeline"), (snapshot) => {
         entries.push(doc.data());
     });
 
-    // Create two copies for the infinite scrolling effect
-    for (let copy = 0; copy < 2; copy++) {
+    // Create a timeline card
+    function createTimelineCard(entry) {
+        const card = document.createElement("div");
+        card.className = "timeline-card";
+
+        const tag = document.createElement("span");
+        tag.className = "card-tag";
+        tag.textContent = entry.category || "Experience";
+
+        const title = document.createElement("h3");
+        title.textContent = entry.name || "Untitled";
+
+        const role = document.createElement("p");
+        role.className = "card-role";
+        role.textContent = entry.role || "";
+
+        const location = document.createElement("div");
+        location.className = "card-location";
+        location.textContent = entry.location || "";
+
+        card.append(tag, title, role, location);
+
+        return card;
+    }
+
+    // Display original entries
+    entries.forEach((entry) => {
+        timelineTrack.appendChild(createTimelineCard(entry));
+    });
+
+    // Duplicate entries for the infinite scrolling effect
+    // Only when there are at least four entries
+    if (entries.length >= 4) {
         entries.forEach((entry) => {
-            const card = document.createElement("div");
-            card.className = "timeline-card";
+            const duplicate = createTimelineCard(entry);
 
-            const tag = document.createElement("span");
-            tag.className = "card-tag";
-            tag.textContent = entry.category || "Experience";
+            duplicate.setAttribute("aria-hidden", "true");
 
-            const title = document.createElement("h3");
-            title.textContent = entry.name || "Untitled";
-
-            const role = document.createElement("p");
-            role.className = "card-role";
-            role.textContent = entry.role || "";
-
-            const location = document.createElement("div");
-            location.className = "card-location";
-            location.textContent = entry.location || "";
-
-            card.append(tag, title, role, location);
-            timelineTrack.appendChild(card);
+            timelineTrack.appendChild(duplicate);
         });
     }
 });
