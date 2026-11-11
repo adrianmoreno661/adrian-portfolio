@@ -58,7 +58,7 @@
             <h2 class="section-heading">What I Can Do</h2>
 
             <div class="bubbles-container" id="skills-container">
-                <!-- Skills will load here automatically -->
+                <!-- Skills load automatically from Firestore -->
             </div>
         </section>
 
@@ -66,56 +66,13 @@
         <section class="marquee-section">
             <div class="marquee-window">
                 <div class="marquee-track" id="timeline-track">
-
-                    <!-- SET 1 -->
-                    <div class="timeline-card">
-                        <span class="card-tag">School</span>
-                        <h3>Highland High School</h3>
-                        <p class="card-role">CLASS OF '27</p>
-                        <span class="card-location">Palmdale, CA</span>
-                    </div>
-
-                    <div class="timeline-card">
-                        <span class="card-tag">School</span>
-                        <h3>Highland High School</h3>
-                        <p class="card-role">CLASS OF '27</p>
-                        <span class="card-location">Palmdale, CA</span>
-                    </div>
-
-                    <div class="timeline-card">
-                        <span class="card-tag">School</span>
-                        <h3>Highland High School</h3>
-                        <p class="card-role">CLASS OF '27</p>
-                        <span class="card-location">Palmdale, CA</span>
-                    </div>
-
-                    <!-- SET 2 (Duplicate for seamless infinite loop) -->
-                    <div class="timeline-card" aria-hidden="true">
-                        <span class="card-tag">School</span>
-                        <h3>Highland High School</h3>
-                        <p class="card-role">CLASS OF '27</p>
-                        <span class="card-location">Palmdale, CA</span>
-                    </div>
-
-                    <div class="timeline-card" aria-hidden="true">
-                        <span class="card-tag">School</span>
-                        <h3>Highland High School</h3>
-                        <p class="card-role">CLASS OF '27</p>
-                        <span class="card-location">Palmdale, CA</span>
-                    </div>
-
-                    <div class="timeline-card" aria-hidden="true">
-                        <span class="card-tag">School</span>
-                        <h3>Highland High School</h3>
-                        <p class="card-role">CLASS OF '27</p>
-                        <span class="card-location">Palmdale, CA</span>
-                    </div>
-
+                    <!-- Timeline cards load automatically from Firestore -->
                 </div>
             </div>
         </section>
 
     </main>
+
     <script type="module" src="resume.js"></script>
 
 </body>
