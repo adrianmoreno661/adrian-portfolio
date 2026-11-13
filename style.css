@@ -2,7 +2,6 @@
 /* =========================
    GLOBAL SETTINGS
 ========================= */
-
 * {
     box-sizing: border-box;
 }
@@ -44,7 +43,6 @@ input {
 /* =========================
    LAYOUT CONTAINERS
 ========================= */
-
 .container {
     width: 100%;
     max-width: 1300px;
@@ -57,7 +55,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(2rem, 5vw, 6rem);
+    gap: clamp(1.5rem, 3vw, 3rem);
     width: 100%;
     min-width: 0;
 }
@@ -65,7 +63,6 @@ input {
 /* =========================
    NAVBAR
 ========================= */
-
 .navbar {
     background-color: #161617;
     z-index: 100;
@@ -122,7 +119,6 @@ input {
 /* =========================
    HOME SECTION
 ========================= */
-
 .welcome_card {
     display: flex;
     align-items: center;
@@ -164,7 +160,6 @@ input {
 /* =========================
    SOCIAL ICONS
 ========================= */
-
 .socials {
     display: flex;
     gap: 1.5rem;
@@ -195,7 +190,6 @@ input {
 /* =========================
    EXPLORE MORE BUTTON
 ========================= */
-
 .cta-btn {
     display: inline-flex;
     align-items: center;
@@ -232,7 +226,6 @@ input {
 /* =========================
    HOME PHOTO
 ========================= */
-
 .hero_container {
     flex: 1.5;
     display: flex;
@@ -250,9 +243,102 @@ input {
 }
 
 /* =========================
+   AM TEAM RADIO
+   DESKTOP ONLY
+========================= */
+.team-radio {
+    flex: 0 0 270px;
+    min-width: 0;
+    background-color: #1c1c1f;
+    border: 1px solid #303034;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.team-radio-header,
+.team-radio-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    background-color: #202023;
+}
+
+.team-radio-header {
+    border-bottom: 1px solid #303034;
+}
+
+.team-radio-label {
+    color: #94A3B8;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08rem;
+}
+
+.team-radio-status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #DC2626;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+}
+
+.radio-indicator {
+    width: 7px;
+    height: 7px;
+    background-color: #DC2626;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(220, 38, 38, 0.7);
+}
+
+.team-radio-content {
+    padding: 1rem;
+}
+
+.radio-frequency {
+    color: #DC2626;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12rem;
+    margin: 0 0 0.8rem;
+}
+
+.team-radio-content h2 {
+    color: #e5e7eb;
+    font-family: "Audiowide", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin: 0 0 0.6rem;
+}
+
+.radio-description {
+    color: #94A3B8;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+}
+
+.spotify-player {
+    display: block;
+    width: 100%;
+    height: 352px;
+    border: none;
+    border-radius: 10px;
+    background-color: #121212;
+}
+
+.team-radio-footer {
+    border-top: 1px solid #303034;
+    color: #64748b;
+    font-size: 0.6rem;
+}
+
+/* =========================
    ABOUT ME SECTION
 ========================= */
-
 #about_section {
     background-color: #121213;
     width: 100%;
@@ -308,7 +394,6 @@ input {
 /* =========================
    AUTOMATIC ABOUT SLIDESHOW
 ========================= */
-
 .about_image_container {
     flex: 1;
     display: flex;
@@ -333,9 +418,7 @@ input {
 }
 
 /* Three images, approximately four seconds each */
-
 @keyframes imageSlide {
-
     0%, 28% {
         transform: translateX(0);
     }
@@ -351,13 +434,11 @@ input {
     100% {
         transform: translateX(0);
     }
-
 }
 
 /* =========================
    RECENT PROJECTS SECTION
 ========================= */
-
 #recent_projects {
     background-color: #161617;
     width: 100%;
@@ -408,7 +489,6 @@ input {
 /* =========================
    PROJECT FLIP CARDS
 ========================= */
-
 .pipeline-card {
     display: block;
     width: 100%;
@@ -453,7 +533,6 @@ input {
 }
 
 /* CARD BACK */
-
 .pipeline-card-back {
     background-color: #202023;
     border-color: #DC2626;
@@ -481,7 +560,6 @@ input {
 }
 
 /* FRONT CARD HINT */
-
 .card-hint {
     position: absolute;
     bottom: 15px;
@@ -496,9 +574,7 @@ input {
 /* =========================
    TABLET RESPONSIVE
 ========================= */
-
 @media (max-width: 1000px) and (min-width: 769px) {
-
     .container {
         padding: 0 1.5rem;
     }
@@ -518,6 +594,10 @@ input {
 
     .hero_container {
         height: 55vh;
+    }
+
+    .team-radio {
+        display: none;
     }
 
     .about-layout {
@@ -540,15 +620,12 @@ input {
     .pipeline-card {
         height: 260px;
     }
-
 }
 
 /* =========================
    MOBILE RESPONSIVE
 ========================= */
-
 @media (max-width: 768px) {
-
     html {
         scroll-snap-type: none;
     }
@@ -644,6 +721,10 @@ input {
         object-fit: cover;
     }
 
+    .team-radio {
+        display: none;
+    }
+
     #about_section {
         padding: 5rem 0;
         height: auto;
@@ -695,15 +776,12 @@ input {
     .pipeline-card-back {
         padding: 1rem;
     }
-
 }
 
 /* =========================
    SMALL PHONE SUPPORT
 ========================= */
-
 @media (max-width: 480px) {
-
     .container {
         padding: 0 1rem;
     }
@@ -763,27 +841,21 @@ input {
     .pipeline-card {
         height: 230px;
     }
-
 }
 
 /* =========================
    DESKTOP CARD HOVER
 ========================= */
-
 @media (hover: hover) and (pointer: fine) {
-
     .pipeline-card:hover .pipeline-card-inner {
         transform: rotateY(180deg);
     }
-
 }
 
 /* =========================
    REDUCED MOTION
 ========================= */
-
 @media (prefers-reduced-motion: reduce) {
-
     html {
         scroll-behavior: auto;
         scroll-snap-type: none;
@@ -796,5 +868,4 @@ input {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-
 }
