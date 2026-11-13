@@ -249,6 +249,7 @@ input {
 .team-radio {
     flex: 0 0 270px;
     min-width: 0;
+    align-self: center;
     background-color: #1c1c1f;
     border: 1px solid #303034;
     border-radius: 12px;
@@ -256,17 +257,19 @@ input {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
-.team-radio-header,
-.team-radio-footer {
+.team-radio-toggle {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.9rem 1rem;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem;
     background-color: #202023;
-}
-
-.team-radio-header {
-    border-bottom: 1px solid #303034;
+    border: none;
+    color: inherit;
+    font-family: "JetBrains Mono", monospace;
+    cursor: pointer;
+    text-align: left;
 }
 
 .team-radio-label {
@@ -294,8 +297,24 @@ input {
     box-shadow: 0 0 8px rgba(220, 38, 38, 0.7);
 }
 
+.radio-arrow {
+    color: #DC2626;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.team-radio-toggle[aria-expanded="true"] .radio-arrow {
+    transform: rotate(45deg);
+}
+
 .team-radio-content {
+    display: none;
     padding: 1rem;
+    border-top: 1px solid #303034;
+}
+
+.team-radio-content.is-open {
+    display: block;
 }
 
 .radio-frequency {
@@ -331,7 +350,12 @@ input {
 }
 
 .team-radio-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1rem;
     border-top: 1px solid #303034;
+    background-color: #202023;
     color: #64748b;
     font-size: 0.6rem;
 }
