@@ -107,3 +107,30 @@ onSnapshot(
         console.error("Error loading homepage projects:", error);
     }
 );
+
+// =========================
+// AM RADIO TOGGLE
+// =========================
+
+const radioToggle = document.querySelector(".team-radio-toggle");
+const radioContent = document.querySelector(".team-radio-content");
+
+if (radioToggle && radioContent) {
+
+    radioToggle.addEventListener("click", () => {
+
+        const isExpanded =
+            radioToggle.getAttribute("aria-expanded") === "true";
+
+        // Update expanded state
+        radioToggle.setAttribute(
+            "aria-expanded",
+            String(!isExpanded)
+        );
+
+        // Open or close Spotify player
+        radioContent.classList.toggle("is-open", !isExpanded);
+
+    });
+
+}
